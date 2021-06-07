@@ -29,7 +29,7 @@ class AggregationCollection
     {
         $aggregations = [];
 
-        foreach($this->aggregations as $aggregation) {
+        foreach ($this->aggregations as $aggregation) {
             $aggregations[$aggregation->getName()] = $aggregation->toArray();
         }
 

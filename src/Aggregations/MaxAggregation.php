@@ -32,7 +32,7 @@ class MaxAggregation extends Aggregation
         }
 
         return [
-            'max' => $parameters
+            'max' => $parameters,
         ];
     }
 }
