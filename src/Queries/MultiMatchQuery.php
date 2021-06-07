@@ -7,7 +7,7 @@ class MultiMatchQuery implements Query
     public static function create(
         string $query,
         array $fields,
-        int | string $fuzziness = 0
+        int|string|null $fuzziness = null
     ): static {
         return new self($query, $fields, $fuzziness);
     }
@@ -15,18 +15,23 @@ class MultiMatchQuery implements Query
     public function __construct(
         protected string $query,
         protected array $fields,
-        protected int | string $fuzziness = 0
+        protected int|string|null $fuzziness = null
     ) {
     }
 
     public function toArray(): array
     {
-        return [
+        $multiMatch = [
             'multi_match' => [
                 'query' => $this->query,
                 'fields' => $this->fields,
-                'fuzziness' => $this->fuzziness,
             ],
         ];
+
+        if($this->fuzziness) {
+            $multiMatch['multi_match']['fuzziness'] = $this->fuzziness;
+        }
+
+        return $multiMatch;
     }
 }
