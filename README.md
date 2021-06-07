@@ -1,14 +1,14 @@
 # Build and execute an Elasticsearch search query using a fluent PHP API
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/elasticsearch_query_builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch_query_builder)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/elasticsearch_query_builder/run-tests?label=tests)](https://github.com/spatie/elasticsearch_query_builder/actions?query=workflow%3ATests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/spatie/elasticsearch_query_builder/Check%20&%20fix%20styling?label=code%20style)](https://github.com/spatie/elasticsearch_query_builder/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/elasticsearch_query_builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch_query_builder)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/elasticsearch-query-builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch-query-builder)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/elasticsearch-query-builder/run-tests?label=tests)](https://github.com/spatie/elasticsearch-query-builder/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/spatie/elasticsearch-query-builder/Check%20&%20fix%20styling?label=code%20style)](https://github.com/spatie/elasticsearch-query-builder/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/elasticsearch-query-builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch-query-builder)
 
 ---
 This package can be used as to scaffold a Laravel package. Follow these steps to get started:
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this elasticsearch_query_builder
+1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this elasticsearch-query-builder
 2. Run "./configure.sh" to run a script that will replace all placeholders throughout all the files
 3. Have fun creating your package.
 4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
@@ -29,14 +29,14 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require spatie/elasticsearch_query_builder
+composer require spatie/elasticsearch-query-builder
 ```
 
 ## Usage
 
 ```php
-$elasticsearch_query_builder = new Spatie\QueryBuilder();
-echo $elasticsearch_query_builder->echoPhrase('Hello, Spatie!');
+$elasticsearch-query-builder = new Spatie\QueryBuilder();
+echo $elasticsearch-query-builder->echoPhrase('Hello, Spatie!');
 ```
 
 ## Testing

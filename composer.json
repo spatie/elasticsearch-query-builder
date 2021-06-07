@@ -1,5 +1,5 @@
 {
-    "name": "spatie/elasticsearch_query_builder",
+    "name": "spatie/elasticsearch-query-builder",
     "description": "Build and execute an Elasticsearch search query using a fluent PHP API",
     "keywords": [
         "spatie",
