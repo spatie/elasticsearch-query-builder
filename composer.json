@@ -20,6 +20,7 @@
         "php": "^8.0"
     },
     "require-dev": {
+        "elasticsearch/elasticsearch": "^7.12",
         "friendsofphp/php-cs-fixer": "^2.17",
         "phpunit/phpunit": "^9.5",
         "spatie/ray": "^1.10",
