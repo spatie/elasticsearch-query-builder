@@ -1,16 +1,18 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "spatie/elasticsearch_query_builder",
+    "description": "Build and execute an Elasticsearch search query using a fluent PHP API",
     "keywords": [
-        ":vendor_name",
-        "package_slug"
+        "spatie",
+        "elasticsearch-query-builder",
+        "elasticsearch",
+        "search"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/spatie/elasticsearch-query-builder",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Alex Vanderbist",
+            "email": "alex.vanderbist@gmail.com",
             "role": "Developer"
         }
     ],
@@ -25,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "Spatie\\ElasticsearchQueryBuilder\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Spatie\\ElasticsearchQueryBuilder\\Tests\\": "tests"
         }
     },
     "scripts": {

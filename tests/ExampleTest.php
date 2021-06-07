@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Spatie\QueryBuilder\Tests;
 
 use PHPUnit\Framework\TestCase;
 
