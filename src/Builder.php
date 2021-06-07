@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Builder;
+namespace Spatie\ElasticsearchQueryBuilder;
 
 use Elasticsearch\Client;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
