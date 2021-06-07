@@ -29,7 +29,7 @@ class SortCollection
     {
         $sorts = [];
 
-        foreach($this->sorts as $sort) {
+        foreach ($this->sorts as $sort) {
             $sorts[] = $sort->toArray();
         }
 

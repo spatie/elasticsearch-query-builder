@@ -32,7 +32,7 @@ class MinAggregation extends Aggregation
         }
 
         return [
-            'min' => $parameters
+            'min' => $parameters,
         ];
     }
 }

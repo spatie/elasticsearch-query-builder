@@ -13,7 +13,8 @@ class TermQuery implements Query
         return new self($field, $value);
     }
 
-    public function __construct(string $field, string $value) {
+    public function __construct(string $field, string $value)
+    {
         $this->field = $field;
         $this->value = $value;
     }

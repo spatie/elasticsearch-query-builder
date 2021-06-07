@@ -8,7 +8,8 @@ use Spatie\ElasticsearchQueryBuilder\Aggregations\Concerns\WithMissing;
 
 class TermsAggregation extends Aggregation
 {
-    use WithMissing, WithAggregations;
+    use WithMissing;
+    use WithAggregations;
 
     protected string $field;
 
