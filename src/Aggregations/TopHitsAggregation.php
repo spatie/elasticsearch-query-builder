@@ -25,7 +25,7 @@ class TopHitsAggregation extends Aggregation
         $this->sort = $sort;
     }
 
-    public function toArray(): array
+    public function payload(): array
     {
         $parameters = [
             'size' => $this->size,

@@ -8,14 +8,11 @@ use Spatie\ElasticsearchQueryBuilder\Aggregations\Concerns\WithMissing;
 
 class TermsAggregation extends Aggregation
 {
-    use WithMissing;
-    use WithAggregations;
+    use WithMissing, WithAggregations;
 
     protected string $field;
 
     protected ?int $size = null;
-
-    protected ?array $metaData = null;
 
     protected ?array $order = null;
 
@@ -38,13 +35,6 @@ class TermsAggregation extends Aggregation
         return $this;
     }
 
-    public function metaData(array $metaData): self
-    {
-        $this->metaData = $metaData;
-
-        return $this;
-    }
-
     public function order(array $order): self
     {
         $this->order = $order;
@@ -52,7 +42,7 @@ class TermsAggregation extends Aggregation
         return $this;
     }
 
-    public function toArray(): array
+    public function payload(): array
     {
         $parameters = [
             'field' => $this->field,
@@ -76,10 +66,6 @@ class TermsAggregation extends Aggregation
 
         if (! $this->aggregations->isEmpty()) {
             $aggregation['aggs'] = $this->aggregations->toArray();
-        }
-
-        if ($this->metaData !== null) {
-            $aggregation['meta'] = $this->metaData;
         }
 
         return $aggregation;

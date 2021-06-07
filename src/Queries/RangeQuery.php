@@ -4,13 +4,13 @@ namespace Spatie\ElasticsearchQueryBuilder\Queries;
 
 class RangeQuery implements Query
 {
-    protected null | int | float | string $gte = null;
+    protected null|int|float|string $gte = null;
 
-    protected null | int | float | string $lt = null;
+    protected null|int|float|string $lt = null;
 
-    protected null | int | float | string $lte = null;
+    protected null|int|float|string $lte = null;
 
-    protected null | int | float | string $gt = null;
+    protected null|int|float|string $gt = null;
 
     public static function create(string $field): self
     {
@@ -21,28 +21,28 @@ class RangeQuery implements Query
     {
     }
 
-    public function lt(int | float | string $value): self
+    public function lt(int|float|string $value): self
     {
         $this->lt = $value;
 
         return $this;
     }
 
-    public function lte(int | float | string $value): self
+    public function lte(int|float|string $value): self
     {
         $this->lte = $value;
 
         return $this;
     }
 
-    public function gt(int | float | string $value): self
+    public function gt(int|float|string $value): self
     {
         $this->gt = $value;
 
         return $this;
     }
 
-    public function gte(int | float | string $value): self
+    public function gte(int|float|string $value): self
     {
         $this->gte = $value;
 

@@ -21,7 +21,7 @@ class MinAggregation extends Aggregation
         $this->field = $field;
     }
 
-    public function toArray(): array
+    public function payload(): array
     {
         $parameters = [
             'field' => $this->field,
@@ -32,7 +32,7 @@ class MinAggregation extends Aggregation
         }
 
         return [
-            'min' => $parameters,
+            'min' => $parameters
         ];
     }
 }

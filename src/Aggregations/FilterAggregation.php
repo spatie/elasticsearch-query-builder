@@ -30,7 +30,7 @@ class FilterAggregation extends Aggregation
         $this->aggregations = new AggregationCollection(...$aggregations);
     }
 
-    public function toArray(): array
+    public function payload(): array
     {
         return [
             'filter' => $this->filter->toArray(),

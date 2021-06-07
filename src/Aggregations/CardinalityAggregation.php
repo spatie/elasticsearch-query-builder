@@ -21,7 +21,7 @@ class CardinalityAggregation extends Aggregation
         $this->field = $field;
     }
 
-    public function toArray(): array
+    public function payload(): array
     {
         $parameters = [
             'field' => $this->field,
