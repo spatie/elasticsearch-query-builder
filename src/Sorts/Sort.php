@@ -11,6 +11,10 @@ class Sort
 
     protected string $order;
 
+    protected ?string $missing;
+
+    protected ?string $unmappedType;
+
     public static function create(string $field, string $order): static
     {
         return new self($field, $order);
@@ -22,12 +26,36 @@ class Sort
         $this->order = $order;
     }
 
+    public function missing(string $missing): static
+    {
+        $this->missing = $missing;
+
+        return $this;
+    }
+
+    public function unmappedType(string $unmappedType): static
+    {
+        $this->unmappedType = $unmappedType;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
+        $payload = [
+            'order' => $this->order,
+        ];
+
+        if($this->missing){
+            $payload['missing'] = $this->missing;
+        }
+
+        if($this->unmappedType){
+            $payload['unmapped_type'] = $this->unmappedType;
+        }
+
         return [
-            $this->field => [
-                'order' => $this->order,
-            ],
+            $this->field => $payload,
         ];
     }
 }
