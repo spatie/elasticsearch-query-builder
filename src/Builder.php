@@ -22,6 +22,10 @@ class Builder
 
     protected ?int $from = null;
 
+    protected ?array $fields = null;
+
+    protected bool $withAggregations = true;
+
     public function __construct(protected Client $client)
     {
     }
@@ -103,6 +107,20 @@ class Builder
         return $this;
     }
 
+    public function fields(array $fields): static
+    {
+        $this->fields = array_merge($this->fields ?? [], $fields)
+
+        return $this;
+    }
+
+    public function withoutAggregations(): static
+    {
+        $this->withAggregations = false;
+
+        return $this;
+    }
+
     public function getPayload(): array
     {
         $payload = [];
@@ -111,12 +129,16 @@ class Builder
             $payload['query'] = $this->query->toArray();
         }
 
-        if ($this->aggregations) {
+        if ($this->withAggregations && $this->aggregations) {
             $payload['aggs'] = $this->aggregations->toArray();
         }
 
         if ($this->sorts) {
             $payload['sort'] = $this->sorts->toArray();
+        }
+
+        if($this->fields){
+            $payload['fields'] = $this->fields;
         }
 
         return $payload;
