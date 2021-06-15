@@ -46,11 +46,11 @@ class Sort
             'order' => $this->order,
         ];
 
-        if($this->missing){
+        if ($this->missing) {
             $payload['missing'] = $this->missing;
         }
 
-        if($this->unmappedType){
+        if ($this->unmappedType) {
             $payload['unmapped_type'] = $this->unmappedType;
         }
 
