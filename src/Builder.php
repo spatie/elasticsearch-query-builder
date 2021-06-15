@@ -137,7 +137,7 @@ class Builder
             $payload['sort'] = $this->sorts->toArray();
         }
 
-        if($this->fields){
+        if ($this->fields) {
             $payload['fields'] = $this->fields;
         }
 
