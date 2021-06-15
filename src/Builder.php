@@ -138,7 +138,7 @@ class Builder
         }
 
         if ($this->fields) {
-            $payload['fields'] = $this->fields;
+            $payload['_source'] = $this->fields;
         }
 
         return $payload;
