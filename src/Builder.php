@@ -109,7 +109,7 @@ class Builder
 
     public function fields(array $fields): static
     {
-        $this->fields = array_merge($this->fields ?? [], $fields)
+        $this->fields = array_merge($this->fields ?? [], $fields);
 
         return $this;
     }
