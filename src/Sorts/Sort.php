@@ -11,9 +11,9 @@ class Sort
 
     protected string $order;
 
-    protected ?string $missing;
+    protected ?string $missing = null;
 
-    protected ?string $unmappedType;
+    protected ?string $unmappedType = null;
 
     public static function create(string $field, string $order): static
     {
