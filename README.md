@@ -1,13 +1,15 @@
 **PACKAGE IN DEVELOPMENT, DO NOT USE YET**
 
-# Build and execute an Elasticsearch search query using a fluent PHP API
+# Build and execute ElasticSearch queries using a fluent PHP API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/elasticsearch-query-builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch-query-builder)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/elasticsearch-query-builder/run-tests?label=tests)](https://github.com/spatie/elasticsearch-query-builder/actions?query=workflow%3ATests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/spatie/elasticsearch-query-builder/Check%20&%20fix%20styling?label=code%20style)](https://github.com/spatie/elasticsearch-query-builder/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/elasticsearch-query-builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch-query-builder)
 
-Readme coming soon...
+---
+
+This package is a _lightweight_ query builder for ElasticSearch. It was specifically built for our [elasticsearch-search-string-parser](https://github.com/spatie/elasticsearch-search-string-parser) so it covers most use-cases but might lack certain features. We're always open for PRs if you need anything specific!
 
 ## Support us
 
