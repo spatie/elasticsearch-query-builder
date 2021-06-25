@@ -66,31 +66,33 @@ The `$builder->addQuery()` method can be used to add any of the available `Query
 
 The following query types are available:
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\ExistsQuery`
+### `ExistsQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\ExistsQuery::create('terms_and_conditions');
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
+### `MatchQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2);
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
+### `MultiMatchQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\MultiMatchQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MultiMatchQuery::create('john', ['email', 'email'], fuzziness: 'auto');
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
+### `NestedQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery::create(
@@ -99,9 +101,9 @@ The following query types are available:
 );
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
+### `RangeQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\RangeQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\RangeQuery::create('age')
@@ -109,33 +111,31 @@ The following query types are available:
     ->lte(1337);
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
+### `TermQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\TermQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\TermQuery::create('user.id', 'flx');
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
+### `WildcardQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\WildcardQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www. elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\WildcardQuery::create('user.id', '*doe');
 ```
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
+### `BoolQuery`
 
-### `\Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery::create()
     ->add($matchQuery, 'must_not')
     ->add($existsQuery, 'must_not');
 ```
-
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
 
 ### Chaining multiple queries
 
@@ -152,7 +152,7 @@ More information on the boolean query and its occurrence types can be found [in 
 
 ## Adding aggregations
 
-
+## Extras
 
 ## Testing
 
