@@ -66,7 +66,7 @@ The `$builder->addQuery()` method can be used to add any of the available `Query
 
 The following query types are available:
 
-### `ExistsQuery`
+#### `ExistsQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
 
@@ -74,7 +74,7 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\ExistsQuery::create('terms_and_conditions');
 ```
 
-### `MatchQuery`
+#### `MatchQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
 
@@ -82,7 +82,7 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2);
 ```
 
-### `MultiMatchQuery`
+#### `MultiMatchQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
 
@@ -90,7 +90,7 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\MultiMatchQuery::create('john', ['email', 'email'], fuzziness: 'auto');
 ```
 
-### `NestedQuery`
+#### `NestedQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
 
@@ -101,7 +101,7 @@ The following query types are available:
 );
 ```
 
-### `RangeQuery`
+#### `RangeQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
 
@@ -111,7 +111,7 @@ The following query types are available:
     ->lte(1337);
 ```
 
-### `TermQuery`
+#### `TermQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
 
@@ -119,7 +119,7 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\TermQuery::create('user.id', 'flx');
 ```
 
-### `WildcardQuery`
+#### `WildcardQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www. elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
 
@@ -127,7 +127,7 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\WildcardQuery::create('user.id', '*doe');
 ```
 
-### `BoolQuery`
+#### `BoolQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
 
