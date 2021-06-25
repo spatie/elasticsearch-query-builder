@@ -142,10 +142,14 @@ The following query types are available:
 Multiple `addQuery()` calls can be chained on one `Builder`. Under the hood they'll be added to a `BoolQuery` with occurrence type `must`. By passing a second argument to the `addQuery()` method you can select a different occurrence type:
 
 ```php
-$builder->addQuery(
-    MatchQuery::create('name', 'billie'), 
-    'must_not' // available types: must, must_not, should, filter
-);
+$builder
+    ->addQuery(
+        MatchQuery::create('name', 'billie'), 
+        'must_not' // available types: must, must_not, should, filter
+    )
+    ->addQuery(
+        MatchQuery::create('team', 'eillish')
+    );
 ```
 
 More information on the boolean query and its occurrence types can be found [in the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).
