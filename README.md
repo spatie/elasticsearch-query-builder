@@ -1,5 +1,3 @@
-**PACKAGE IN DEVELOPMENT, DO NOT USE YET**
-
 # Build and execute ElasticSearch queries using a fluent PHP API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/elasticsearch-query-builder.svg?style=flat-square)](https://packagist.org/packages/spatie/elasticsearch-query-builder)
