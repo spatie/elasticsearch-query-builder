@@ -22,6 +22,8 @@ class Builder
 
     protected ?int $from = null;
 
+    protected ?array $searchAfter = null;
+
     protected ?array $fields = null;
 
     protected bool $withAggregations = true;
@@ -103,6 +105,13 @@ class Builder
     public function from(int $from): static
     {
         $this->from = $from;
+
+        return $this;
+    }
+
+    public function searchAfter(?array $searchAfter): static
+    {
+        $this->searchAfter = $searchAfter;
 
         return $this;
     }

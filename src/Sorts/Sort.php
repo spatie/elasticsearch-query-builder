@@ -15,7 +15,7 @@ class Sort
 
     protected ?string $unmappedType = null;
 
-    public static function create(string $field, string $order): static
+    public static function create(string $field, string $order = 'desc'): static
     {
         return new self($field, $order);
     }
