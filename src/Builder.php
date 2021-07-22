@@ -151,7 +151,7 @@ class Builder
         }
 
         if ($this->searchAfter) {
-            $payload['search_after'] = $this->fields;
+            $payload['search_after'] = $this->searchAfter;
         }
 
         return $payload;

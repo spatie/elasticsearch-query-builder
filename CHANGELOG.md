@@ -2,9 +2,13 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 1.1.2 - 2021-07-22
+
+- fix `search_after` parameter in request body
+
 ## 1.1.1 - 2021-07-22
 
-- add `search_after` to request body 
+- add `search_after` to request body
 
 ## 1.1.0 - 2021-07-22
 
