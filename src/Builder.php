@@ -150,6 +150,10 @@ class Builder
             $payload['_source'] = $this->fields;
         }
 
+        if ($this->searchAfter) {
+            $payload['search_after'] = $this->fields;
+        }
+
         return $payload;
     }
 }
