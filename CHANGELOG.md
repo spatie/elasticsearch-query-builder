@@ -2,6 +2,10 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 1.2.0 - 2021-07-28
+
+- add `type` to `MultiMatchQuery`
+
 ## 1.1.2 - 2021-07-22
 
 - fix `search_after` parameter in request body
