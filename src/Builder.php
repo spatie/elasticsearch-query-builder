@@ -69,6 +69,9 @@ class Builder
     {
         $payload = $this->getPayload();
 
+        ray()->clearAll()->send($payload);
+        ray(json_encode($payload));
+
         $params = [
             'body' => $payload,
         ];
@@ -85,7 +88,7 @@ class Builder
             $params['from'] = $this->from;
         }
 
-        return $this->client->search($params);
+        return ray()->pass($this->client->search($params));
     }
 
     public function index(string $searchIndex): static
