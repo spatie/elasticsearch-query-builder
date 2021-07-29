@@ -2,6 +2,10 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 1.2.2 - 2021-07-29
+
+- remove debug statements (again :facepalm:)
+
 ## 1.2.1 - 2021-07-29
 
 - remove debug statements
