@@ -69,9 +69,6 @@ class Builder
     {
         $payload = $this->getPayload();
 
-        ray()->clearAll()->send($payload);
-        ray(json_encode($payload));
-
         $params = [
             'body' => $payload,
         ];
