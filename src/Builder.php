@@ -85,7 +85,7 @@ class Builder
             $params['from'] = $this->from;
         }
 
-        return ray()->pass($this->client->search($params));
+        return $this->client->search($params);
     }
 
     public function index(string $searchIndex): static
