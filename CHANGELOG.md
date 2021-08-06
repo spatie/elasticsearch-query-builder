@@ -2,6 +2,10 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 1.3.0 - 2021-08-06
+
+- add `PrefixQuery`
+
 ## 1.2.2 - 2021-07-29
 
 - remove debug statements (again :facepalm:)
