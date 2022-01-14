@@ -27,9 +27,14 @@ class ReverseNestedAggregation extends Aggregation
 
     public function payload(): array
     {
-        return [
-            'reverse_nested' => new stdClass(),
-            'aggs' => $this->aggregations->toArray(),
+        $aggregation = [
+            'reverse_nested' => new stdClass()
         ];
+
+        if (! $this->aggregations->isEmpty()) {
+            $aggregation['aggs'] = $this->aggregations->toArray();
+        }
+
+        return $aggregation;
     }
 }
