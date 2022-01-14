@@ -253,6 +253,17 @@ The following query types are available:
 );
 ```
 
+#### `BucketSortAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\BucketSortAggregation::create(
+    'statistics_sort',
+    \Spatie\ElasticsearchQueryBuilder\Sorts\Sort::create('clicks'),
+);
+```
+
 ## Adding sorts
 
 The `Builder` (and some aggregations) has a `addSort()` method that takes a `Sort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
