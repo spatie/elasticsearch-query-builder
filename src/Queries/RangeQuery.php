@@ -12,6 +12,8 @@ class RangeQuery implements Query
 
     protected null | int | float | string $gt = null;
 
+    protected null | string $timezone = null;
+
     public static function create(string $field): self
     {
         return new self($field);
@@ -49,6 +51,13 @@ class RangeQuery implements Query
         return $this;
     }
 
+    public function timezone(string $value): self
+    {
+        $this->timezone = $value;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         $parameters = [];
@@ -67,6 +76,10 @@ class RangeQuery implements Query
 
         if ($this->gte !== null) {
             $parameters['gte'] = $this->gte;
+        }
+
+        if ($this->timezone !== null) {
+            $parameters['time_zone'] = $this->timezone;
         }
 
         return [
