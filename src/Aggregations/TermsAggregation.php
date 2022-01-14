@@ -17,6 +17,10 @@ class TermsAggregation extends Aggregation
 
     protected ?array $order = null;
 
+    private ?int $min_doc_count = null;
+
+    private ?int $shard_size = null;
+
     public static function create(string $name, string $field): self
     {
         return new self($name, $field);
@@ -43,6 +47,20 @@ class TermsAggregation extends Aggregation
         return $this;
     }
 
+    public function minDocCount(int $min_doc_count): self
+    {
+        $this->min_doc_count = $min_doc_count;
+
+        return $this;
+    }
+
+    public function shardSize(int $shard_size): self
+    {
+        $this->shard_size = $shard_size;
+
+        return $this;
+    }
+
     public function payload(): array
     {
         $parameters = [
@@ -59,6 +77,14 @@ class TermsAggregation extends Aggregation
 
         if ($this->order) {
             $parameters['order'] = $this->order;
+        }
+
+        if ($this->min_doc_count) {
+            $parameters['min_doc_count'] = $this->min_doc_count;
+        }
+
+        if ($this->shard_size) {
+            $parameters['shard_size'] = $this->shard_size;
         }
 
         $aggregation = [
