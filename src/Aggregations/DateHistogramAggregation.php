@@ -23,12 +23,14 @@ class DateHistogramAggregation extends Aggregation
 
     protected ?array $order = null;
 
-    public function __construct(string $name, Aggregation ...$aggregations) {
+    public function __construct(string $name, Aggregation ...$aggregations)
+    {
         $this->name = $name;
         $this->aggregations = new AggregationCollection(...$aggregations);
     }
 
-    public static function create(string $name, Aggregation ...$aggregations): self {
+    public static function create(string $name, Aggregation ...$aggregations): self
+    {
         return new self($name, ...$aggregations);
     }
 
