@@ -253,6 +253,21 @@ The following query types are available:
 );
 ```
 
+#### `RangeAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\RangeAggregation::create(
+    'product_age',
+    'age',
+    [
+        'from' => 10,
+        'to' => 20,
+    ],
+);
+```
+
 ## Adding sorts
 
 The `Builder` (and some aggregations) has a `addSort()` method that takes a `Sort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
