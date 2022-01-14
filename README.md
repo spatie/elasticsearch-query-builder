@@ -253,6 +253,14 @@ The following query types are available:
 );
 ```
 
+#### `SumAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\SumAggregation::create('prices', 'products.price');
+```
+
 ## Adding sorts
 
 The `Builder` (and some aggregations) has a `addSort()` method that takes a `Sort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
