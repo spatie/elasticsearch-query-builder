@@ -253,6 +253,18 @@ The following query types are available:
 );
 ```
 
+#### `BucketScriptAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\BucketScriptAggregation::create(
+    'cpc',
+    ['cost' => 'statistics.cost', 'clicks' => 'statistics.clicks'],
+    'params.cost / params.clicks',
+);
+```
+
 ## Adding sorts
 
 The `Builder` (and some aggregations) has a `addSort()` method that takes a `Sort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
