@@ -8,11 +8,13 @@ class BucketSortAggregation extends Aggregation
 {
     protected Sort $sort;
 
-    public static function create(string $name, Sort $sort): self {
+    public static function create(string $name, Sort $sort): self
+    {
         return new self($name, $sort);
     }
 
-    public function __construct(string $name, Sort $sort) {
+    public function __construct(string $name, Sort $sort)
+    {
         $this->name = $name;
         $this->sort = $sort;
     }
