@@ -253,6 +253,18 @@ The following query types are available:
 );
 ```
 
+#### `DateHistogramAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\DateHistogramAggregation::create('date_group')
+    ->script('doc.created_time.value.getHourOfDay()')
+    ->interval(1)
+    ->format('epoch_millis')
+    ->extendedBounds(['min' => 0, 'max' => 100]);
+```
+
 ## Adding sorts
 
 The `Builder` (and some aggregations) has a `addSort()` method that takes a `Sort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
