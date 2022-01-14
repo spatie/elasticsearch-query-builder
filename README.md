@@ -132,7 +132,8 @@ The following query types are available:
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery::create()
     ->add($matchQuery, 'must_not')
-    ->add($existsQuery, 'must_not');
+    ->add($existsQuery, 'must_not')
+    ->minimumShouldMatch(1);
 ```
 
 ### Chaining multiple queries
