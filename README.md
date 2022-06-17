@@ -17,7 +17,7 @@ use Spatie\ElasticsearchQueryBuilder\Aggregations\MaxAggregation;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 use Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery;
 
-$client = Elasticsearch\ClientBuilder::create()->build();
+$client = Elastic\Elasticsearch\ClientBuilder::create()->build();
 
 $companies = (new Builder($client))
     ->index('companies')
@@ -44,7 +44,7 @@ composer require spatie/elasticsearch-query-builder
 
 ## Basic usage
 
-The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class. It requires an `\Elasticsearch\Client` passed in the constructor. Take a look at the [ElasticSearch SDK docs](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/installation.html) to learn more about connecting to your ElasticSearch cluster. 
+The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class. It requires an `\Elastic\Elasticsearch\Client` passed in the constructor. Take a look at the [ElasticSearch SDK docs](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/installation.html) to learn more about connecting to your ElasticSearch cluster. 
 
 The `Builder` class contains some methods to [add queries](#adding-queries), [aggregations](#adding-aggregations), [sorts](#adding-sorts), [fields](#retrieve-specific-fields) and some extras for [pagination](#pagination). You can read more about these methods below. Once you've fully built-up the query you can use `$builder->search()` to execute the query or `$builder->getPayload()` to get the raw payload for ElasticSearch.
 
@@ -52,7 +52,7 @@ The `Builder` class contains some methods to [add queries](#adding-queries), [ag
 use Spatie\ElasticsearchQueryBuilder\Queries\RangeQuery;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 
-$client = Elasticsearch\ClientBuilder::create()->build();
+$client = Elastic\Elasticsearch\ClientBuilder::create()->build();
 
 $builder = new Builder($client);
 
@@ -163,7 +163,7 @@ The `$builder->addAggregation()` method can be used to add any of the available 
 use Spatie\ElasticsearchQueryBuilder\Aggregations\TermsAggregation;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 
-$results = (new Builder(Elasticsearch\ClientBuilder::create()->build()))
+$results = (new Builder(Elastic\Elasticsearch\ClientBuilder::create()->build()))
     ->addAggregation(TermsAggregation::create('genres', 'genre'))
     ->search();
 
@@ -290,7 +290,7 @@ use Spatie\ElasticsearchQueryBuilder\Builder;
 $pageSize = 100;
 $pageNumber = $_GET['page'] ?? 1;
 
-$pageResults = (new Builder(\Elasticsearch\ClientBuilder::create()))
+$pageResults = (new Builder(Elastic\Elasticsearch\ClientBuilder::create()))
     ->size($pageSize)
     ->from(($pageNumber - 1) * $pageSize)
     ->search();
