@@ -2,6 +2,10 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 1.4.0 - 2022-07-20
+
+- add `TermsQuery`
+
 ## 1.3.0 - 2021-08-06
 
 - add `PrefixQuery`
