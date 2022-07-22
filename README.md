@@ -42,6 +42,9 @@ You can install the package via composer:
 composer require spatie/elasticsearch-query-builder
 ```
 
+> **Note**
+> If you're using `elasticsearch/elasticsearch` v7 you need to use [v1](https://github.com/spatie/elasticsearch-query-builder/tree/v1) of this package.
+
 ## Basic usage
 
 The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class. It requires an `\Elastic\Elasticsearch\Client` passed in the constructor. Take a look at the [ElasticSearch SDK docs](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/installation.html) to learn more about connecting to your ElasticSearch cluster. 
