@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.0.0 - 2022-07-22
+
+### What's Changed
+
+- Elasticseach ^8.0 support by @h-rafiee in https://github.com/spatie/elasticsearch-query-builder/pull/19
+
+### New Contributors
+
+- @h-rafiee made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/19
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/1.4.0...2.0.0
+
 ## 1.4.0 - 2022-07-20
 
 - add `TermsQuery`
