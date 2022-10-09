@@ -3,6 +3,8 @@
 namespace Spatie\ElasticsearchQueryBuilder;
 
 use Elastic\Elasticsearch\Client;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Http\Promise\Promise;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
 use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
@@ -65,7 +67,7 @@ class Builder
         return $this;
     }
 
-    public function search(): array
+    public function search(): Elasticsearch|Promise
     {
         $payload = $this->getPayload();
 
