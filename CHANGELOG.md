@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.0.1 - 2022-10-10
+
+### What's Changed
+
+- Fix `Builder::search()` return data type by @imdhemy in https://github.com/spatie/elasticsearch-query-builder/pull/24
+
+### New Contributors
+
+- @imdhemy made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/24
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.0.0...2.0.1
+
 ## 2.0.0 - 2022-07-22
 
 ### What's Changed
