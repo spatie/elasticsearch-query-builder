@@ -206,6 +206,14 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Aggregations\MinAggregation::create('min_price', 'price');
 ```
 
+#### `SumAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\SumAggregation::create('sum_price', 'price');
+```
+
 #### `NestedAggregation`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html)
