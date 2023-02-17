@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.1.0 - 2023-02-17
+
+### What's Changed
+
+- IB-1280 added sum aggregation by @webbaard in https://github.com/spatie/elasticsearch-query-builder/pull/26
+
+### New Contributors
+
+- @webbaard made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/26
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.0.1...2.1.0
+
 ## 2.0.1 - 2022-10-10
 
 ### What's Changed
