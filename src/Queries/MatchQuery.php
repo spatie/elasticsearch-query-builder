@@ -6,7 +6,7 @@ class MatchQuery implements Query
 {
     public static function create(
         string $field,
-        string | int $query,
+        string | int | bool $query,
         null | string | int $fuzziness = null
     ): self {
         return new self($field, $query, $fuzziness);

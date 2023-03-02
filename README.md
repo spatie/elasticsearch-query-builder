@@ -81,6 +81,8 @@ The following query types are available:
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2);
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('age', 22);
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('active', false);
 ```
 
 #### `MultiMatchQuery`
