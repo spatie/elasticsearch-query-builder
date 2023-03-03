@@ -14,7 +14,7 @@ class MatchQuery implements Query
 
     public function __construct(
         protected string $field,
-        protected string | int $query,
+        protected string | int | bool $query,
         protected null | string | int $fuzziness = null
     ) {
     }
