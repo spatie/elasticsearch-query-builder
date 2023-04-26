@@ -7,15 +7,17 @@ class MatchQuery implements Query
     public static function create(
         string $field,
         string | int $query,
-        null | string | int $fuzziness = null
+        null | string | int $fuzziness = null,
+        null | string $operator = null,
     ): self {
-        return new self($field, $query, $fuzziness);
+        return new self($field, $query, $fuzziness, $operator);
     }
 
     public function __construct(
         protected string $field,
         protected string | int $query,
-        protected null | string | int $fuzziness = null
+        protected null | string | int $fuzziness = null,
+        protected null | string $operator = null
     ) {
     }
 
@@ -28,6 +30,10 @@ class MatchQuery implements Query
                 ],
             ],
         ];
+
+        if ($this->operator) {
+            $match['match'][$this->field]['operator'] = $this->operator;
+        }
 
         if ($this->fuzziness) {
             $match['match'][$this->field]['fuzziness'] = $this->fuzziness;

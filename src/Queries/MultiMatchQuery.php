@@ -15,16 +15,18 @@ class MultiMatchQuery implements Query
         string $query,
         array $fields,
         int | string | null $fuzziness = null,
-        ?string $type = null
+        ?string $type = null,
+        ?string $operator = null,
     ): static {
-        return new self($query, $fields, $fuzziness, $type);
+        return new self($query, $fields, $fuzziness, $type, $operator);
     }
 
     public function __construct(
         protected string $query,
         protected array $fields,
         protected int | string | null $fuzziness = null,
-        protected ?string $type = null
+        protected ?string $type = null,
+        protected ?string $operator = null,
     ) {
     }
 
@@ -36,6 +38,10 @@ class MultiMatchQuery implements Query
                 'fields' => $this->fields,
             ],
         ];
+
+        if ($this->operator) {
+            $multiMatch['multi_match']['operator'] = $this->operator;
+        }
 
         if ($this->fuzziness) {
             $multiMatch['multi_match']['fuzziness'] = $this->fuzziness;

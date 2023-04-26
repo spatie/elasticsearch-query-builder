@@ -18,7 +18,7 @@ $client = Elastic\Elasticsearch\ClientBuilder::create()->build();
 
 $companies = (new Builder($client))
     ->index('companies')
-    ->addQuery(MatchQuery::create('name', 'spatie', fuzziness: 3))
+    ->addQuery(MatchQuery::create('name', 'spatie packages', fuzziness: 3, operator: 'and'))
     ->addAggregation(MaxAggregation::create('score'))
     ->search();
 ```
@@ -80,7 +80,7 @@ The following query types are available:
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
 
 ```php
-\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2);
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2, operator: 'and');
 ```
 
 #### `MultiMatchQuery`
