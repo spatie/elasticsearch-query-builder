@@ -24,6 +24,8 @@ class Builder
 
     protected ?int $from = null;
 
+    protected bool $trackTotalHits = false;
+
     protected ?array $searchAfter = null;
 
     protected ?array $fields = null;
@@ -87,7 +89,18 @@ class Builder
             $params['from'] = $this->from;
         }
 
+        if ($this->trackTotalHits) {
+            $params['track_total_hits'] = true;
+        }
+
         return $this->client->search($params);
+    }
+
+    public function trackTotalHits(): static
+    {
+        $this->trackTotalHits = true;
+
+        return $this;
     }
 
     public function index(string $searchIndex): static
