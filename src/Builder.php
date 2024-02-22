@@ -136,6 +136,14 @@ class Builder
     {
         $payload = [];
 
+        if ($this->from !== null) {
+            $payload['from'] = $this->from;
+        }
+
+        if ($this->size !== null) {
+            $payload['size'] = $this->size;
+        }
+
         if ($this->query) {
             $payload['query'] = $this->query->toArray();
         }
