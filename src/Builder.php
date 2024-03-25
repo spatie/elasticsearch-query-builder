@@ -30,6 +30,8 @@ class Builder
 
     protected bool $withAggregations = true;
 
+    protected bool $trackTotalHits = false;
+
     public function __construct(protected Client $client)
     {
     }
@@ -87,12 +89,23 @@ class Builder
             $params['from'] = $this->from;
         }
 
+        if($this->trackTotalHits){
+            $params['track_total_hits'] = true;
+        }
+
         return $this->client->search($params);
     }
 
     public function index(string $searchIndex): static
     {
         $this->searchIndex = $searchIndex;
+
+        return $this;
+    }
+
+    public function trackTotalHits($value = true): static
+    {
+        $this->trackTotalHits = $value;
 
         return $this;
     }
