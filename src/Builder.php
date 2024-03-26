@@ -89,7 +89,7 @@ class Builder
             $params['from'] = $this->from;
         }
 
-        if($this->trackTotalHits){
+        if($this->trackTotalHits) {
             $params['track_total_hits'] = true;
         }
 
