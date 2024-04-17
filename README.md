@@ -287,6 +287,22 @@ The `fields()` method can be used to request specific fields from the resulting 
 $builder->fields('user.id', 'http.*.status');
 ```
 
+## Highlighting
+
+The `highlight()` method can be used to add a highlight section to your query along the rules in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/highlighting.html).
+
+```php
+$highlightSettings = [
+    'pre_tags' => ['<em>'],
+    'post_tags' => ['</em>'],
+    'fields' => [
+        '*' => (object) []
+    ]
+];
+
+$builder->highlight($highlightSettings);
+```
+
 ## Pagination
 
 Finally the `Builder` also features a `size()` and `from()` method for the corresponding ElasticSearch search parameters. These can be used to build a paginated search. Take a look the following example to get a rough idea:
