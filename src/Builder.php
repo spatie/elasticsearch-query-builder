@@ -32,6 +32,8 @@ class Builder
 
     protected bool $trackTotalHits = false;
 
+    protected ?array $highlight = null;
+
     public function __construct(protected Client $client)
     {
     }
@@ -145,6 +147,13 @@ class Builder
         return $this;
     }
 
+    public function highlight(array $highlight): static
+    {
+        $this->highlight = $highlight;
+
+        return $this;
+    }
+
     public function getPayload(): array
     {
         $payload = [];
@@ -167,6 +176,10 @@ class Builder
 
         if ($this->searchAfter) {
             $payload['search_after'] = $this->searchAfter;
+        }
+
+        if ($this->highlight) {
+            $payload['highlight'] = $this->highlight;
         }
 
         return $payload;
