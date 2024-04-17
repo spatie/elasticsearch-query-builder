@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.3.0 - 2024-04-17
+
+### What's Changed
+
+* Add highlighting by @MilanLamote in https://github.com/spatie/elasticsearch-query-builder/pull/39
+
+### New Contributors
+
+* @MilanLamote made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/39
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.2.0...2.3.0
+
 ## 2.2.0 - 2024-03-26
 
 ### What's Changed
