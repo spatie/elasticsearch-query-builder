@@ -119,9 +119,17 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\TermQuery::create('user.id', 'flx');
 ```
 
+#### `TermsQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery::create('user.id', ['flx', 'fly']);
+```
+
 #### `WildcardQuery`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www. elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\WildcardQuery::create('user.id', '*doe');
