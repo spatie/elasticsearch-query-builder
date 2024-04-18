@@ -311,6 +311,16 @@ $highlightSettings = [
 $builder->highlight($highlightSettings);
 ```
 
+## Post filter
+
+The `addPostFilterQuery()` method can be used to add a post_filter BoolQuery to your query along the rules in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/filter-search-results.html#post-filter).
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery;
+
+$builder->addPostFilterQuery(TermsQuery::create('user.id', ['flx', 'fly']));
+```
+
 ## Pagination
 
 Finally the `Builder` also features a `size()` and `from()` method for the corresponding ElasticSearch search parameters. These can be used to build a paginated search. Take a look the following example to get a rough idea:
