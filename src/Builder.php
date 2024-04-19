@@ -34,6 +34,8 @@ class Builder
 
     protected ?array $highlight = null;
 
+    protected ?BoolQuery $postFilterQuery = null;
+
     public function __construct(protected Client $client)
     {
     }
@@ -154,6 +156,17 @@ class Builder
         return $this;
     }
 
+    public function addPostFilterQuery(Query $query, string $boolType = 'must'): static
+    {
+        if (! $this->postFilterQuery) {
+            $this->postFilterQuery = new BoolQuery();
+        }
+
+        $this->postFilterQuery->add($query, $boolType);
+
+        return $this;
+    }
+
     public function getPayload(): array
     {
         $payload = [];
@@ -180,6 +193,10 @@ class Builder
 
         if ($this->highlight) {
             $payload['highlight'] = $this->highlight;
+        }
+
+        if ($this->postFilterQuery) {
+            $payload['post_filter'] = $this->postFilterQuery->toArray();
         }
 
         return $payload;

@@ -119,9 +119,17 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\TermQuery::create('user.id', 'flx');
 ```
 
+#### `TermsQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery::create('user.id', ['flx', 'fly']);
+```
+
 #### `WildcardQuery`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www. elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\WildcardQuery::create('user.id', '*doe');
@@ -301,6 +309,16 @@ $highlightSettings = [
 ];
 
 $builder->highlight($highlightSettings);
+```
+
+## Post filter
+
+The `addPostFilterQuery()` method can be used to add a post_filter BoolQuery to your query along the rules in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/filter-search-results.html#post-filter).
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery;
+
+$builder->addPostFilterQuery(TermsQuery::create('user.id', ['flx', 'fly']));
 ```
 
 ## Pagination
