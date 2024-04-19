@@ -2,6 +2,14 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.4.0 - 2024-04-19
+
+### What's Changed
+
+* Add post filter logic and enhance readme by @MilanLamote in https://github.com/spatie/elasticsearch-query-builder/pull/41
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.3.0...2.4.0
+
 ## 2.3.0 - 2024-04-17
 
 ### What's Changed
