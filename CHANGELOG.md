@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.6.0 - 2024-04-25
+
+### What's Changed
+
+* Add minimum_should_match support for BoolQuery by @srowan in https://github.com/spatie/elasticsearch-query-builder/pull/38
+
+### New Contributors
+
+* @srowan made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/38
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.5.0...2.6.0
+
 ## 2.5.0 - 2024-04-25
 
 ### What's Changed
