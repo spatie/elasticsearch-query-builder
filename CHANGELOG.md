@@ -2,6 +2,14 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.5.0 - 2024-04-25
+
+### What's Changed
+
+* Add boost parameter to MatchQuery by @MilanLamote in https://github.com/spatie/elasticsearch-query-builder/pull/42
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.4.0...2.5.0
+
 ## 2.4.0 - 2024-04-19
 
 ### What's Changed
