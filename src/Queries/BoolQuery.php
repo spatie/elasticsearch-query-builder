@@ -32,6 +32,7 @@ class BoolQuery implements Query
     public function minimumShouldMatch(?string $value): static
     {
         $this->minimumShouldMatch = $value;
+
         return $this;
     }
 
