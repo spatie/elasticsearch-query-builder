@@ -79,7 +79,7 @@ The following query types are available:
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
 
 ```php
-\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2);
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2, boost: 5.0);
 ```
 
 #### `MultiMatchQuery`
