@@ -11,6 +11,8 @@ class BoolQuery implements Query
     protected array $should = [];
     protected array $must_not = [];
 
+    protected ?string $minimumShouldMatch = null;
+
     public static function create(): static
     {
         return new self();
@@ -27,6 +29,12 @@ class BoolQuery implements Query
         return $this;
     }
 
+    public function minimumShouldMatch(?string $value): static
+    {
+        $this->minimumShouldMatch = $value;
+        return $this;
+    }
+
     public function toArray(): array
     {
         $bool = [
@@ -35,6 +43,11 @@ class BoolQuery implements Query
             'should' => array_map(fn (Query $query) => $query->toArray(), $this->should),
             'must_not' => array_map(fn (Query $query) => $query->toArray(), $this->must_not),
         ];
+
+        if ($this->minimumShouldMatch) {
+            $bool["minimum_should_match"] = $this->minimumShouldMatch;
+        }
+
 
         return [
             'bool' => array_filter($bool),
