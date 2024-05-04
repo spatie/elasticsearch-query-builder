@@ -1,0 +1,26 @@
+services:
+  composer:
+    image: composer:latest
+    volumes:
+      - .:/app
+
+  test:
+    image: php:8.0-cli
+    working_dir: "/usr/src/myapp"
+    volumes:
+      - .:/usr/src/myapp
+    entrypoint: "vendor/bin/phpunit"
+
+  psalm:
+    image: php:8.0-cli
+    working_dir: "/usr/src/myapp"
+    volumes:
+      - .:/usr/src/myapp
+    entrypoint: "vendor/bin/psalm"
+
+  format:
+    image: php:8.0-cli
+    working_dir: "/usr/src/myapp"
+    volumes:
+      - .:/usr/src/myapp
+    entrypoint: "vendor/bin/php-cs-fixer fix --allow-risky=yes"

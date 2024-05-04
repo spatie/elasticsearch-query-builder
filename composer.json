@@ -48,7 +48,10 @@
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
