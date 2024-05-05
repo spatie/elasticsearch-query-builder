@@ -3,10 +3,14 @@
 namespace Spatie\ElasticsearchQueryBuilder\Sorts;
 
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasMissing;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasMode;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasUnmappedType;
 
 class NestedSort implements Sorting
 {
+    use HasMissing;
+    use HasUnmappedType;
     use HasMode;
 
     public function __construct(
@@ -14,28 +18,45 @@ class NestedSort implements Sorting
         protected string $field,
         protected string $order,
         protected ?Query $filter,
-        ?string $mode,
-        protected ?NestedSort $nested
+        protected ?NestedSort $nested,
+        protected ?int $maxChildren
     ) {
-        $this->mode = $mode;
     }
 
     public static function create(
         string $path,
         string $field,
         string $order,
-        ?Query $filter = null,
-        ?string $mode = null,
-        ?NestedSort $nested = null
     ): self {
         return new self(
             $path,
             $field,
             $order,
-            $filter,
-            $mode,
-            $nested
+            null,
+            null,
+            null
         );
+    }
+
+    public function filter(Query $filter): self
+    {
+        $this->filter = $filter;
+
+        return $this;
+    }
+
+    public function nested(NestedSort $nested): self
+    {
+        $this->nested = $nested;
+
+        return $this;
+    }
+
+    public function maxChildren(int $maxChildren): self
+    {
+        $this->maxChildren = $maxChildren;
+
+        return $this;
     }
 
     public function toArray(): array
@@ -45,11 +66,14 @@ class NestedSort implements Sorting
                 [
                     'order' => $this->order,
                     'mode' => $this->mode,
+                    'missing' => $this->missing,
+                    'unmapped_type' => $this->unmappedType,
                     'nested' => array_filter(
                         [
                             'path' => $this->path,
                             'filter' => $this->filter?->toArray(),
-                            'nested' => $this->nested?->toArray()
+                            'nested' => $this->nested?->toArray(),
+                            'max_children' => $this->maxChildren,
                         ]
                     ),
                 ]
