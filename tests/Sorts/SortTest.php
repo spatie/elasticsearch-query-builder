@@ -14,7 +14,7 @@ class SortTest extends TestCase
         $this->sort = new Sort('sortField', Sort::ASC);
     }
 
-    public function testToArrayBuildsCorrectQuery(): void
+    public function testToArrayBuildsCorrectSort(): void
     {
         self::assertEquals(
             [
@@ -26,7 +26,7 @@ class SortTest extends TestCase
         );
     }
 
-    public function testToArrayBuildsCorrectQueryWithMissing(): void
+    public function testToArrayBuildsCorrectSortWithMissing(): void
     {
         self::assertEquals(
             [
@@ -39,7 +39,7 @@ class SortTest extends TestCase
         );
     }
 
-    public function testToArrayBuildsCorrectQueryWithUnmappedType(): void
+    public function testToArrayBuildsCorrectSortWithUnmappedType(): void
     {
         self::assertEquals(
             [
@@ -52,7 +52,7 @@ class SortTest extends TestCase
         );
     }
 
-    public function testToArrayBuildsCorrectQueryWithMode(): void
+    public function testToArrayBuildsCorrectSortWithMode(): void
     {
         self::assertEquals(
             [
