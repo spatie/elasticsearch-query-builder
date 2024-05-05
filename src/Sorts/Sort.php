@@ -3,12 +3,14 @@
 namespace Spatie\ElasticsearchQueryBuilder\Sorts;
 
 use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasMissing;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasMode;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasUnmappedType;
 
 class Sort implements Sorting
 {
     use HasMissing;
     use HasUnmappedType;
+    use HasMode;
 
     public static function create(string $field, string $order = self::DESC): static
     {
@@ -27,6 +29,7 @@ class Sort implements Sorting
                     'order' => $this->order,
                     'missing' => $this->missing,
                     'unmapped_type' => $this->unmappedType,
+                    'mode' => $this->mode,
                 ]
             ),
         ];

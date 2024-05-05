@@ -51,4 +51,17 @@ class SortTest extends TestCase
             $this->sort->unmappedType('long')->toArray()
         );
     }
+
+    public function testToArrayBuildsCorrectQueryWithMode(): void
+    {
+        self::assertEquals(
+            [
+                'sortField' => [
+                    'order' => Sort::ASC,
+                    'mode' => 'avg'
+                ]
+            ],
+            $this->sort->mode('avg')->toArray()
+        );
+    }
 }
