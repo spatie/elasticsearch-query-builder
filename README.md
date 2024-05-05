@@ -289,6 +289,8 @@ $builder
 
 ### Nested sort
 
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples)
+
 ```php
 use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
 
