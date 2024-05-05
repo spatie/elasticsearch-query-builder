@@ -294,7 +294,7 @@ use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
 
 $builder
     ->addSort(
-        NestedSort::create('books', 'books.rating', NestedSort::ASC, mode: 'max')
+        NestedSort::create('books', 'books.rating', NestedSort::ASC)
     );
 ```
 
@@ -310,10 +310,8 @@ $builder
         NestedSort::create(
             'books', 
             'books.rating', 
-            NestedSort::ASC, 
-            mode: 'max', 
-            filter: BoolQuery::create()->add(TermQuery::create('books.category', 'comedy'))
-        )
+            NestedSort::ASC
+        )->filter(BoolQuery::create()->add(TermQuery::create('books.category', 'comedy'))
     );
 ```
 
