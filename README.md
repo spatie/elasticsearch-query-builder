@@ -288,12 +288,32 @@ $builder
 ```
 
 ### Nested sort
+
 ```php
 use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
 
 $builder
     ->addSort(
         NestedSort::create('books', 'books.rating', NestedSort::ASC, mode: 'max')
+    );
+```
+
+#### Nested sort with filter
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
+use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
+use Spatie\ElasticsearchQueryBuilder\Queries\TermQuery;
+
+$builder
+    ->addSort(
+        NestedSort::create(
+            'books', 
+            'books.rating', 
+            NestedSort::ASC, 
+            mode: 'max', 
+            filter: BoolQuery::create()->add(TermQuery::create('books.category', 'comedy'))
+        )
     );
 ```
 
