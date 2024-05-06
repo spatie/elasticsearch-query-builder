@@ -287,6 +287,36 @@ $builder
     );
 ```
 
+### Nested sort
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples)
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
+
+$builder
+    ->addSort(
+        NestedSort::create('books', 'books.rating', NestedSort::ASC)
+    );
+```
+
+#### Nested sort with filter
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
+use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
+use Spatie\ElasticsearchQueryBuilder\Queries\TermQuery;
+
+$builder
+    ->addSort(
+        NestedSort::create(
+            'books', 
+            'books.rating', 
+            NestedSort::ASC
+        )->filter(BoolQuery::create()->add(TermQuery::create('books.category', 'comedy'))
+    );
+```
+
 ## Retrieve specific fields
 
 The `fields()` method can be used to request specific fields from the resulting documents without returning the entire `_source` entry. You can read more about the specifics of the fields parameter in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-fields.html).

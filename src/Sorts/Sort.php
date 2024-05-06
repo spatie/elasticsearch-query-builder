@@ -2,60 +2,36 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Sorts;
 
-class Sort
+use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasMissing;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasMode;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Concerns\HasUnmappedType;
+
+class Sort implements Sorting
 {
-    public const ASC = 'asc';
-    public const DESC = 'desc';
+    use HasMissing;
+    use HasUnmappedType;
+    use HasMode;
 
-    protected string $field;
-
-    protected string $order;
-
-    protected ?string $missing = null;
-
-    protected ?string $unmappedType = null;
-
-    public static function create(string $field, string $order = 'desc'): static
+    public static function create(string $field, string $order = self::DESC): static
     {
         return new self($field, $order);
     }
 
-    public function __construct(string $field, string $order)
+    public function __construct(protected string $field, protected string $order)
     {
-        $this->field = $field;
-        $this->order = $order;
-    }
-
-    public function missing(string $missing): static
-    {
-        $this->missing = $missing;
-
-        return $this;
-    }
-
-    public function unmappedType(string $unmappedType): static
-    {
-        $this->unmappedType = $unmappedType;
-
-        return $this;
     }
 
     public function toArray(): array
     {
-        $payload = [
-            'order' => $this->order,
-        ];
-
-        if ($this->missing) {
-            $payload['missing'] = $this->missing;
-        }
-
-        if ($this->unmappedType) {
-            $payload['unmapped_type'] = $this->unmappedType;
-        }
-
         return [
-            $this->field => $payload,
+            $this->field => array_filter(
+                [
+                    'order' => $this->order,
+                    'missing' => $this->missing,
+                    'unmapped_type' => $this->unmappedType,
+                    'mode' => $this->mode,
+                ]
+            ),
         ];
     }
 }

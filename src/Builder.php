@@ -8,7 +8,7 @@ use Http\Promise\Promise;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
 use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
-use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Sorting;
 
 class Builder
 {
@@ -62,7 +62,7 @@ class Builder
         return $this;
     }
 
-    public function addSort(Sort $sort): static
+    public function addSort(Sorting $sort): static
     {
         if (! $this->sorts) {
             $this->sorts = new SortCollection();
