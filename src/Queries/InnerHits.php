@@ -2,6 +2,9 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Queries;
 
+use Spatie\ElasticsearchQueryBuilder\SortCollection;
+use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
+
 class InnerHits
 {
     public static function create(): self
@@ -12,7 +15,8 @@ class InnerHits
     public function __construct(
         protected ?int $from = null,
         protected ?int $size = null,
-        protected ?string $name = null
+        protected ?string $name = null,
+        protected ?SortCollection $sorts = null
     ) {
     }
 
@@ -37,6 +41,17 @@ class InnerHits
         return $this;
     }
 
+    public function addSort(Sort $sort): self
+    {
+        if (! $this->sorts) {
+            $this->sorts = new SortCollection();
+        }
+
+        $this->sorts->add($sort);
+
+        return $this;
+    }
+
     public function getPayload(): array
     {
         return array_filter(
@@ -44,6 +59,7 @@ class InnerHits
                 'from' => $this->from,
                 'size' => $this->size,
                 'name' => $this->name,
+                'sort' => $this->sorts?->toArray(),
             ]
         );
     }
