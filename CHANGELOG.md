@@ -2,6 +2,21 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 2.7.0 - 2024-05-06
+
+### What's Changed
+
+* Allow `bool` and `int` as types for term query by @sventendo in https://github.com/spatie/elasticsearch-query-builder/pull/34
+* Fix: Include `size` and `from` in getPayload by @harlequin410 in https://github.com/spatie/elasticsearch-query-builder/pull/35
+* Allow filter aggregation without using nested aggregations by @sventendo in https://github.com/spatie/elasticsearch-query-builder/pull/37
+
+### New Contributors
+
+* @sventendo made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/34
+* @harlequin410 made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/35
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.6.0...2.7.0
+
 ## 2.6.0 - 2024-04-25
 
 ### What's Changed
