@@ -48,4 +48,18 @@ class NestedQueryTest extends TestCase
             $this->nestedQuery->scoreMode('min')->toArray()
         );
     }
+
+    public function testToArrayBuildsCorrectNestedQueryWithIgnoreUnmapped(): void
+    {
+        $this->assertEquals(
+            [
+                'nested' => [
+                    'path' => 'path',
+                    'query' => ['query'],
+                    'ignore_unmapped' => true,
+                ]
+            ],
+            $this->nestedQuery->ignoreUnmapped(true)->toArray()
+        );
+    }
 }

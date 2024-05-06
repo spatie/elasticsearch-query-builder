@@ -12,13 +12,21 @@ class NestedQuery implements Query
     public function __construct(
         protected string $path,
         protected Query $query,
-        protected ?string $scoreMode = null
+        protected ?string $scoreMode = null,
+        protected ?bool $ignoreUnmapped = null
     ) {
     }
 
     public function scoreMode(string $scoreMode): self
     {
         $this->scoreMode = $scoreMode;
+
+        return $this;
+    }
+
+    public function ignoreUnmapped(bool $ignoreUnmapped): self
+    {
+        $this->ignoreUnmapped = $ignoreUnmapped;
 
         return $this;
     }
@@ -31,6 +39,7 @@ class NestedQuery implements Query
                     'path' => $this->path,
                     'query' => $this->query->toArray(),
                     'score_mode' => $this->scoreMode,
+                    'ignore_unmapped' => $this->ignoreUnmapped,
                 ]
             ),
         ];
