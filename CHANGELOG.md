@@ -2,6 +2,20 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.0.0 - 2024-05-06
+
+See [upgrading.md](./UPGRADING.md) for possible breaking changes.
+
+### What's Changed
+
+* Added Nested Sort by @dam-bal in https://github.com/spatie/elasticsearch-query-builder/pull/46
+
+### New Contributors
+
+* @dam-bal made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/46
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/2.7.0...3.0.0
+
 ## 2.7.0 - 2024-05-06
 
 ### What's Changed
