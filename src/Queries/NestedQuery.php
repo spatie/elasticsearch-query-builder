@@ -13,7 +13,8 @@ class NestedQuery implements Query
         protected string $path,
         protected Query $query,
         protected ?string $scoreMode = null,
-        protected ?bool $ignoreUnmapped = null
+        protected ?bool $ignoreUnmapped = null,
+        protected ?InnerHits $innerHits = null
     ) {
     }
 
@@ -31,6 +32,13 @@ class NestedQuery implements Query
         return $this;
     }
 
+    public function innerHits(InnerHits $innerHits): self
+    {
+        $this->innerHits = $innerHits;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [
@@ -40,6 +48,7 @@ class NestedQuery implements Query
                     'query' => $this->query->toArray(),
                     'score_mode' => $this->scoreMode,
                     'ignore_unmapped' => $this->ignoreUnmapped,
+                    'inner_hits' => $this->innerHits?->getPayload()
                 ]
             ),
         ];

@@ -2,7 +2,7 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use Spatie\ElasticsearchQueryBuilder\Queries\InnerHits;
 use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery;
 use PHPUnit\Framework\TestCase;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
@@ -60,6 +60,33 @@ class NestedQueryTest extends TestCase
                 ]
             ],
             $this->nestedQuery->ignoreUnmapped(true)->toArray()
+        );
+    }
+
+    public function testToArrayBuildsCorrectNestedQueryWithInnerHits(): void
+    {
+        $innerHitsMock = $this->createMock(InnerHits::class);
+        $innerHitsMock
+            ->method('getPayload')
+            ->willReturn(
+                [
+                    'size' => 10,
+                    'name' => 'test'
+                ]
+            );
+
+        $this->assertEquals(
+            [
+                'nested' => [
+                    'path' => 'path',
+                    'query' => ['query'],
+                    'inner_hits' => [
+                        'size' => 10,
+                        'name' => 'test'
+                    ]
+                ]
+            ],
+            $this->nestedQuery->innerHits($innerHitsMock)->toArray()
         );
     }
 }
