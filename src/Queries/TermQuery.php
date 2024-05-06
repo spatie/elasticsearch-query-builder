@@ -6,14 +6,14 @@ class TermQuery implements Query
 {
     protected string $field;
 
-    protected string $value;
+    protected bool|int|string $value;
 
-    public static function create(string $field, string $value): static
+    public static function create(string $field, bool|int|string $value): static
     {
         return new self($field, $value);
     }
 
-    public function __construct(string $field, string $value)
+    public function __construct(string $field, bool|int|string $value)
     {
         $this->field = $field;
         $this->value = $value;
