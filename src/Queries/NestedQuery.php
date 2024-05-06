@@ -2,6 +2,8 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Queries;
 
+use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
+
 class NestedQuery implements Query
 {
     public static function create(string $path, Query $query): self

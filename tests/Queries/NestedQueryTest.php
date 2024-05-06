@@ -2,9 +2,9 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 
-use Spatie\ElasticsearchQueryBuilder\Queries\InnerHits;
-use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery;
 use PHPUnit\Framework\TestCase;
+use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery;
+use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 
 class NestedQueryTest extends TestCase

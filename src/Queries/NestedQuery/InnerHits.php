@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Queries;
+namespace Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery;
 
 use Spatie\ElasticsearchQueryBuilder\SortCollection;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
