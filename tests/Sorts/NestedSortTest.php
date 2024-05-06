@@ -2,9 +2,9 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Sorts;
 
+use PHPUnit\Framework\TestCase;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
-use PHPUnit\Framework\TestCase;
 
 class NestedSortTest extends TestCase
 {
@@ -18,8 +18,8 @@ class NestedSortTest extends TestCase
                     'order' => NestedSort::DESC,
                     'nested' => [
                         'path' => 'path',
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );
@@ -44,8 +44,8 @@ class NestedSortTest extends TestCase
                     'nested' => [
                         'path' => 'path',
                         'filter' => ['query'],
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );
@@ -66,8 +66,8 @@ class NestedSortTest extends TestCase
                     'mode' => 'avg',
                     'nested' => [
                         'path' => 'path',
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );
@@ -93,8 +93,8 @@ class NestedSortTest extends TestCase
                     'nested' => [
                         'path' => 'path',
                         'nested' => ['nested'],
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );
@@ -120,8 +120,8 @@ class NestedSortTest extends TestCase
                     'missing' => '_last',
                     'nested' => [
                         'path' => 'path',
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );
@@ -147,8 +147,8 @@ class NestedSortTest extends TestCase
                     'unmapped_type' => 'long',
                     'nested' => [
                         'path' => 'path',
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );
@@ -174,8 +174,8 @@ class NestedSortTest extends TestCase
                     'nested' => [
                         'path' => 'path',
                         'max_children' => 123,
-                    ]
-                ]
+                    ],
+                ],
             ],
             $nestedSort->toArray()
         );

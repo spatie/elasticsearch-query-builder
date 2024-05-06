@@ -77,7 +77,7 @@ class NestedSort implements Sorting
                         ]
                     ),
                 ]
-            )
+            ),
         ];
     }
 }

@@ -20,7 +20,7 @@ class SortTest extends TestCase
             [
                 'sortField' => [
                     'order' => Sort::ASC,
-                ]
+                ],
             ],
             $this->sort->toArray()
         );
@@ -32,8 +32,8 @@ class SortTest extends TestCase
             [
                 'sortField' => [
                     'order' => Sort::ASC,
-                    'missing' => '_last'
-                ]
+                    'missing' => '_last',
+                ],
             ],
             $this->sort->missing('_last')->toArray()
         );
@@ -45,8 +45,8 @@ class SortTest extends TestCase
             [
                 'sortField' => [
                     'order' => Sort::ASC,
-                    'unmapped_type' => 'long'
-                ]
+                    'unmapped_type' => 'long',
+                ],
             ],
             $this->sort->unmappedType('long')->toArray()
         );
@@ -58,8 +58,8 @@ class SortTest extends TestCase
             [
                 'sortField' => [
                     'order' => Sort::ASC,
-                    'mode' => 'avg'
-                ]
+                    'mode' => 'avg',
+                ],
             ],
             $this->sort->mode('avg')->toArray()
         );
