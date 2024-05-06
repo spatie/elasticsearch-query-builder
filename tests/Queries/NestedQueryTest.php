@@ -34,4 +34,18 @@ class NestedQueryTest extends TestCase
             $this->nestedQuery->toArray()
         );
     }
+
+    public function testToArrayBuildsCorrectNestedQueryWithScoreMode(): void
+    {
+        $this->assertEquals(
+            [
+                'nested' => [
+                    'path' => 'path',
+                    'query' => ['query'],
+                    'score_mode' => 'min',
+                ]
+            ],
+            $this->nestedQuery->scoreMode('min')->toArray()
+        );
+    }
 }
