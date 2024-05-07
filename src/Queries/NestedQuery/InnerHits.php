@@ -12,11 +12,15 @@ class InnerHits
         return new InnerHits();
     }
 
+    /**
+     * @param string[]|null $fields
+     */
     public function __construct(
         protected ?int $from = null,
         protected ?int $size = null,
         protected ?string $name = null,
-        protected ?SortCollection $sorts = null
+        protected ?SortCollection $sorts = null,
+        protected ?array $fields = null
     ) {
     }
 
@@ -41,6 +45,16 @@ class InnerHits
         return $this;
     }
 
+    /**
+     * @param string[] $fields
+     */
+    public function fields(array $fields): self
+    {
+        $this->fields = $fields;
+
+        return $this;
+    }
+
     public function addSort(Sort $sort): self
     {
         if (! $this->sorts) {
@@ -52,7 +66,7 @@ class InnerHits
         return $this;
     }
 
-    public function getPayload(): array
+    public function toArray(): array
     {
         return array_filter(
             [
@@ -60,6 +74,7 @@ class InnerHits
                 'size' => $this->size,
                 'name' => $this->name,
                 'sort' => $this->sorts?->toArray(),
+                '_source' => $this->fields
             ]
         );
     }

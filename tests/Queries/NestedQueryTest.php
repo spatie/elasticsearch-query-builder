@@ -67,7 +67,7 @@ class NestedQueryTest extends TestCase
     {
         $innerHitsMock = $this->createMock(InnerHits::class);
         $innerHitsMock
-            ->method('getPayload')
+            ->method('toArray')
             ->willReturn(
                 [
                     'size' => 10,

@@ -50,7 +50,7 @@ class NestedQuery implements Query
                     'query' => $this->query->toArray(),
                     'score_mode' => $this->scoreMode,
                     'ignore_unmapped' => $this->ignoreUnmapped,
-                    'inner_hits' => $this->innerHits?->getPayload()
+                    'inner_hits' => $this->innerHits?->toArray()
                 ]
             ),
         ];
