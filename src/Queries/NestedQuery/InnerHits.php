@@ -7,18 +7,18 @@ use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
 
 class InnerHits
 {
-    public static function create(): self
+    public static function create(string $name): self
     {
-        return new InnerHits();
+        return new InnerHits($name);
     }
 
     /**
      * @param string[]|null $fields
      */
     public function __construct(
+        protected string $name,
         protected ?int $from = null,
         protected ?int $size = null,
-        protected ?string $name = null,
         protected ?SortCollection $sorts = null,
         protected ?array $fields = null
     ) {
@@ -34,13 +34,6 @@ class InnerHits
     public function size(int $size): self
     {
         $this->size = $size;
-
-        return $this;
-    }
-
-    public function name(string $name): self
-    {
-        $this->name = $name;
 
         return $this;
     }

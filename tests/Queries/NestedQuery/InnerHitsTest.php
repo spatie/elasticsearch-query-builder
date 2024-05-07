@@ -2,7 +2,6 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries\NestedQuery;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use PHPUnit\Framework\TestCase;
 use Spatie\ElasticsearchQueryBuilder\SortCollection;
@@ -10,54 +9,46 @@ use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
 
 class InnerHitsTest extends TestCase
 {
-    private SortCollection|MockObject $sortsMock;
-
     private InnerHits $innerHits;
 
     protected function setUp(): void
     {
-        $this->innerHits = new InnerHits();
+        $this->innerHits = new InnerHits('test');
     }
 
     public function testToArrayBuildsCorrectInnerHits(): void
     {
         $this->assertEquals(
-            [],
+            [
+                'name' => 'test',
+            ],
             $this->innerHits->toArray()
         );
     }
 
-    public function testToArrayBuildsCorrectInnerHitsWithName(): void
+    public function testToArrayBuildsCorrectInnerHitsWithFrom(): void
     {
         $this->assertEquals(
             [
                 'name' => 'test',
-            ],
-            $this->innerHits->name('test')->toArray()
-        );
-    }
-
-    public function testToArrayBuildsCorrectInnerHitsPayloadWithFrom(): void
-    {
-        $this->assertEquals(
-            [
                 'from' => 123,
             ],
             $this->innerHits->from(123)->toArray()
         );
     }
 
-    public function testToArrayBuildsCorrectInnerHitsPayloadWithSize(): void
+    public function testToArrayBuildsCorrectInnerHitsWithSize(): void
     {
         $this->assertEquals(
             [
+                'name' => 'test',
                 'size' => 123,
             ],
             $this->innerHits->size(123)->toArray()
         );
     }
 
-    public function testToArrayBuildsCorrectInnerHitsPayloadWithSorts(): void
+    public function testToArrayBuildsCorrectInnerHitsWithSorts(): void
     {
         $sortMock = $this->createMock(Sort::class);
 
@@ -67,6 +58,7 @@ class InnerHitsTest extends TestCase
 
         $this->assertEquals(
             [
+                'name' => 'test',
                 'sort' => [
                     [
                         'field' => [
@@ -94,7 +86,7 @@ class InnerHitsTest extends TestCase
             ->method('add')
             ->with($sortMock);
 
-        $innerHits = new InnerHits(sorts: $sortsMock);
+        $innerHits = new InnerHits('test', sorts: $sortsMock);
 
         $innerHits->addSort($sortMock);
     }
