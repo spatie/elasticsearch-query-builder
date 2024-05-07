@@ -6,6 +6,12 @@ use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 
 class NestedQuery implements Query
 {
+    public const SCORE_MODE_AVG = 'avg';
+    public const SCORE_MODE_MAX = 'max';
+    public const SCORE_MODE_MIN = 'min';
+    public const SCORE_MODE_NONE = 'none';
+    public const SCORE_MODE_SUM = 'sum';
+
     public static function create(string $path, Query $query): self
     {
         return new self($path, $query);

@@ -42,10 +42,10 @@ class NestedQueryTest extends TestCase
                 'nested' => [
                     'path' => 'path',
                     'query' => ['query'],
-                    'score_mode' => 'min',
+                    'score_mode' => NestedQuery::SCORE_MODE_MIN,
                 ]
             ],
-            $this->nestedQuery->scoreMode('min')->toArray()
+            $this->nestedQuery->scoreMode(NestedQuery::SCORE_MODE_MIN)->toArray()
         );
     }
 
