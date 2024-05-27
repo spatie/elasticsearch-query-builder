@@ -82,6 +82,13 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery::create('name', 'john doe', fuzziness: 2, boost: 5.0);
 ```
 
+#### `MatchPhraseQuery`
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchPhraseQuery::create('name', 'john doe', slop: 2,zeroTermsQuery: "none",analyzer: "my_analyzer");
+```
+
 #### `MultiMatchQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
