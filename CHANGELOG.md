@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.1.0 - 2024-10-03
+
+### What's Changed
+
+* feat: add MatchPhraseQuery by @summerKK in https://github.com/spatie/elasticsearch-query-builder/pull/50
+
+### New Contributors
+
+* @summerKK made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/50
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.0.0...3.1.0
+
 ## 3.0.0 - 2024-05-06
 
 See [upgrading.md](./UPGRADING.md) for possible breaking changes.
