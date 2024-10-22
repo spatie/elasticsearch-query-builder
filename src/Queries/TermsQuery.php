@@ -8,12 +8,12 @@ class TermsQuery implements Query
 
     protected array $value;
 
-    public static function create(string $field, array $value): static
+    public static function create(string $field, array $value, null | float $boost = null): static
     {
-        return new self($field, $value);
+        return new self($field, $value, $boost);
     }
 
-    public function __construct(string $field, array $value)
+    public function __construct(string $field, array $value, protected null | float $boost = null)
     {
         $this->field = $field;
         $this->value = $value;
@@ -21,10 +21,16 @@ class TermsQuery implements Query
 
     public function toArray(): array
     {
-        return [
+        $terms = [
             'terms' => [
                 $this->field => $this->value,
             ],
         ];
+
+        if ($this->boost) {
+            $terms['terms']['boost'] = $this->boost;
+        }
+
+        return $terms;
     }
 }
