@@ -35,7 +35,7 @@ class MatchQuery implements Query
             $match['match'][$this->field]['fuzziness'] = $this->fuzziness;
         }
 
-        if ($this->boost) {
+        if ($this->boost !== null) {
             $match['match'][$this->field]['boost'] = $this->boost;
         }
 

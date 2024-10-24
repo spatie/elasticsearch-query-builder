@@ -27,7 +27,7 @@ class TermsQuery implements Query
             ],
         ];
 
-        if ($this->boost) {
+        if ($this->boost !== null) {
             $terms['terms']['boost'] = $this->boost;
         }
 
