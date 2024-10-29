@@ -142,6 +142,14 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\WildcardQuery::create('user.id', '*doe');
 ```
 
+#### `PercolateQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\PercolateQuery::create('query', ['title' => 'foo', 'body' => 'bar']);
+```
+
 #### `BoolQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
