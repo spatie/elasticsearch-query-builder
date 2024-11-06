@@ -7,7 +7,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use Spatie\ElasticsearchQueryBuilder\Queries\PercolateQuery;
 
-final class PercolateQueryTest extends TestCase
+class PercolateQueryTest extends TestCase
 {
     public function testCreateReturnsNewInstance(): void
     {
