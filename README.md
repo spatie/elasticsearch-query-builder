@@ -131,7 +131,7 @@ The following query types are available:
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
 
 ```php
-\Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery::create('user.id', ['flx', 'fly']);
+\Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery::create('user.id', ['flx', 'fly'], boost: 5.0);
 ```
 
 #### `WildcardQuery`
