@@ -21,28 +21,28 @@ class RangeQuery implements Query
     {
     }
 
-    public function lt(int | float | string $value): self
+    public function lt(int | float | string | null $value): self
     {
         $this->lt = $value;
 
         return $this;
     }
 
-    public function lte(int | float | string $value): self
+    public function lte(int | float | string | null $value): self
     {
         $this->lte = $value;
 
         return $this;
     }
 
-    public function gt(int | float | string $value): self
+    public function gt(int | float | string | null $value): self
     {
         $this->gt = $value;
 
         return $this;
     }
 
-    public function gte(int | float | string $value): self
+    public function gte(int | float | string | null $value): self
     {
         $this->gte = $value;
 
