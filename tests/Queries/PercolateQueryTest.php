@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 
 use Exception;
