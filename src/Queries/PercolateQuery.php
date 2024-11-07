@@ -38,11 +38,11 @@ class PercolateQuery implements Query
 
     public function toArray(): array
     {
-        if(isset($this->document) && isset($this->index)) {
+        if (isset($this->document) && isset($this->index)) {
             throw new Exception('You can only set an inline document or a document, not both.');
         }
 
-        if (!isset($this->document) && !isset($this->index)) {
+        if (! isset($this->document) && ! isset($this->index)) {
             throw new Exception('You must set an inline document or a document.');
         }
 
