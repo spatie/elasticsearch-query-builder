@@ -2,25 +2,38 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Spatie\ElasticsearchQueryBuilder\Enums\GeoshapeType;
-use Spatie\ElasticsearchQueryBuilder\Enums\SpatialRelation;
 use Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery;
 
 final class GeoshapeQueryTest extends TestCase
 {
     public function testCreateReturnsNewInstance(): void
     {
-        $query = GeoshapeQuery::create('location', GeoshapeType::POINT, [1.0, 2.0]);
+        $query = GeoshapeQuery::create('location', GeoshapeQuery::TYPE_POINT, [1.0, 2.0]);
 
         self::assertInstanceOf(GeoshapeQuery::class, $query);
+    }
+
+    public function testCreateWithIncorrectTypeThrowsException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        GeoshapeQuery::create('location', 'invalid', [1.0, 2.0]);
+    }
+
+    public function testCreateWithIncorrectRelationThrowsException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        GeoshapeQuery::create('location', GeoshapeQuery::TYPE_POINT, [1.0, 2.0], 'invalid');
     }
 
     public function testToArrayBuildsCorrectGeoshapeQuery(): void
     {
         $query = GeoshapeQuery::create(
             'location',
-            GeoshapeType::POLYGON,
+            GeoshapeQuery::TYPE_POLYGON,
             [
                 [
                     [102.0, 2.0],
@@ -59,7 +72,7 @@ final class GeoshapeQueryTest extends TestCase
     {
         $query = GeoshapeQuery::create(
             'location',
-            GeoshapeType::MULTI_POLYGON,
+            GeoshapeQuery::TYPE_MULTIPOLYGON,
             [
                 [
                     [
@@ -80,7 +93,7 @@ final class GeoshapeQueryTest extends TestCase
                     ],
                 ],
             ],
-            SpatialRelation::WITHIN,
+            GeoshapeQuery::RELATION_WITHIN,
         );
 
         $expected = [

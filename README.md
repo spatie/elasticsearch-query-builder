@@ -81,9 +81,9 @@ The following query types are available:
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::create(
   'location', 
-  \Spatie\ElasticsearchQueryBuilder\Enums\GeoshapeType::POINT, 
+  \Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::TYPE_POLYGON, 
   [1.0, 2.0], 
-  \Spatie\ElasticsearchQueryBuilder\Enums\SpatialRelation::WITHIN
+  \Spatie\ElasticsearchQueryBuilder\Queries\GeoShapeQuery::RELATION_INTERSECTS,
 ); 
 ```
 
