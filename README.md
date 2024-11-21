@@ -74,6 +74,19 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\ExistsQuery::create('terms_and_conditions');
 ```
 
+#### `GeoshapeQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html);
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::create(
+  'location', 
+  \Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::TYPE_POLYGON, 
+  [[1.0, 2.0]], 
+  \Spatie\ElasticsearchQueryBuilder\Queries\GeoShapeQuery::RELATION_INTERSECTS,
+); 
+```
+
 #### `MatchQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
