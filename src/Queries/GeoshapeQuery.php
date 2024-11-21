@@ -33,7 +33,7 @@ class GeoshapeQuery implements Query
         $this->field = $field;
         $this->coordinates = $coordinates;
 
-        if (!in_array($type, [
+        if (! in_array($type, [
             self::TYPE_POINT,
             self::TYPE_LINESTRING,
             self::TYPE_POLYGON,
@@ -48,7 +48,7 @@ class GeoshapeQuery implements Query
 
         $this->type = $type;
 
-        if (!in_array($relation, [
+        if (! in_array($relation, [
             self::RELATION_INTERSECTS,
             self::RELATION_DISJOINT,
             self::RELATION_CONTAINS,
@@ -79,7 +79,7 @@ class GeoshapeQuery implements Query
                         'coordinates' => $this->coordinates,
                     ],
                     'relation' => $this->relation ? $this->relation : self::RELATION_INTERSECTS,
-                ]
+                ],
             ],
         ];
     }
