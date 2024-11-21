@@ -2,7 +2,7 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Queries;
 
-use Webmozart\Assert\Assert;
+use InvalidArgumentException;
 
 class GeoshapeQuery implements Query
 {
@@ -33,7 +33,7 @@ class GeoshapeQuery implements Query
         $this->field = $field;
         $this->coordinates = $coordinates;
 
-        Assert::oneOf($type, [
+        if (!in_array($type, [
             self::TYPE_POINT,
             self::TYPE_LINESTRING,
             self::TYPE_POLYGON,
@@ -42,16 +42,20 @@ class GeoshapeQuery implements Query
             self::TYPE_MULTIPOLYGON,
             self::TYPE_GEOMETRYCOLLECTION,
             self::TYPE_ENVELOPE,
-        ]);
+        ], true)) {
+            throw new InvalidArgumentException('Invalid type provided');
+        }
 
         $this->type = $type;
 
-        Assert::oneOf($relation, [
+        if (!in_array($relation, [
             self::RELATION_INTERSECTS,
             self::RELATION_DISJOINT,
             self::RELATION_CONTAINS,
             self::RELATION_WITHIN,
-        ]);
+        ], true)) {
+            throw new InvalidArgumentException('Invalid relation provided');
+        }
 
         $this->relation = $relation;
     }
