@@ -18,6 +18,7 @@ class GeoshapeQuery implements Query
     public const RELATION_DISJOINT = 'disjoint';
     public const RELATION_CONTAINS = 'contains';
     public const RELATION_WITHIN = 'within';
+
     protected string $field;
     protected string $type;
     protected array $coordinates;
