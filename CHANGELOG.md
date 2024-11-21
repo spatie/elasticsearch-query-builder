@@ -2,6 +2,21 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.2.0 - 2024-11-21
+
+### What's Changed
+
+* Add percolate query by @floristenhove in https://github.com/spatie/elasticsearch-query-builder/pull/57
+* Allow setting values to null for RangeQuery by @bram-pkg in https://github.com/spatie/elasticsearch-query-builder/pull/56
+* Add geoshape query by @floristenhove in https://github.com/spatie/elasticsearch-query-builder/pull/58
+
+### New Contributors
+
+* @floristenhove made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/57
+* @bram-pkg made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/56
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.1.0...3.2.0
+
 ## 3.1.0 - 2024-10-03
 
 ### What's Changed
