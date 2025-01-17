@@ -2,8 +2,12 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Queries;
 
+use Spatie\ElasticsearchQueryBuilder\Exceptions\InvalidOperatorValue;
+
 class MatchQuery implements Query
 {
+    protected const VALID_OPERATORS = ['and', 'or'];
+
     public static function create(
         string $field,
         string | int $query,
@@ -11,7 +15,7 @@ class MatchQuery implements Query
         null | float $boost = null,
         null | string $operator = 'or'
     ): self {
-        return new self($field, $query, $fuzziness, $boost);
+        return new self($field, $query, $fuzziness, $boost, $operator);
     }
 
     public function __construct(
@@ -21,6 +25,9 @@ class MatchQuery implements Query
         protected null | float $boost = null,
         protected null | string $operator = 'or'
     ) {
+        if (! in_array(strtolower($operator), self::VALID_OPERATORS)) {
+            throw new InvalidOperatorValue;
+        }
     }
 
     public function toArray(): array
