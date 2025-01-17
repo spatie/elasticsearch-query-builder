@@ -2,6 +2,14 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.2.2 - 2025-01-17
+
+### What's Changed
+
+* Fix missing args for create func by @l3aro in https://github.com/spatie/elasticsearch-query-builder/pull/60
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.2.1...3.2.2
+
 ## 3.2.1 - 2025-01-17
 
 ### What's Changed
