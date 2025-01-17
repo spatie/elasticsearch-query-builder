@@ -11,7 +11,7 @@ class MatchQuery implements Query
         null | float $boost = null,
         null | string $operator = 'or'
     ): self {
-        return new self($field, $query, $fuzziness, $boost);
+        return new self($field, $query, $fuzziness, $boost, $operator);
     }
 
     public function __construct(
