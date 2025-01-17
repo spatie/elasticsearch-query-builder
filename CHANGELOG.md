@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.2.1 - 2025-01-17
+
+### What's Changed
+
+* Support operator in MatchQuery by @l3aro in https://github.com/spatie/elasticsearch-query-builder/pull/59
+
+### New Contributors
+
+* @l3aro made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/59
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.2.0...3.2.1
+
 ## 3.2.0 - 2024-11-21
 
 ### What's Changed
