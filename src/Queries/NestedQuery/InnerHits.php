@@ -67,7 +67,7 @@ class InnerHits
                 'size' => $this->size,
                 'name' => $this->name,
                 'sort' => $this->sorts?->toArray(),
-                '_source' => $this->fields
+                '_source' => $this->fields,
             ]
         );
     }

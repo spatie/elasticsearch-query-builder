@@ -2,8 +2,8 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries\NestedQuery;
 
-use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use PHPUnit\Framework\TestCase;
+use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use Spatie\ElasticsearchQueryBuilder\SortCollection;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
 
@@ -63,9 +63,9 @@ class InnerHitsTest extends TestCase
                     [
                         'field' => [
                             'order' => Sort::ASC,
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ],
             $this->innerHits->addSort($sortMock)->toArray()
         );

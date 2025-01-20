@@ -28,8 +28,8 @@ class NestedQueryTest extends TestCase
             [
                 'nested' => [
                     'path' => 'path',
-                    'query' => ['query']
-                ]
+                    'query' => ['query'],
+                ],
             ],
             $this->nestedQuery->toArray()
         );
@@ -43,7 +43,7 @@ class NestedQueryTest extends TestCase
                     'path' => 'path',
                     'query' => ['query'],
                     'score_mode' => NestedQuery::SCORE_MODE_MIN,
-                ]
+                ],
             ],
             $this->nestedQuery->scoreMode(NestedQuery::SCORE_MODE_MIN)->toArray()
         );
@@ -57,7 +57,7 @@ class NestedQueryTest extends TestCase
                     'path' => 'path',
                     'query' => ['query'],
                     'ignore_unmapped' => true,
-                ]
+                ],
             ],
             $this->nestedQuery->ignoreUnmapped(true)->toArray()
         );
@@ -71,7 +71,7 @@ class NestedQueryTest extends TestCase
             ->willReturn(
                 [
                     'size' => 10,
-                    'name' => 'test'
+                    'name' => 'test',
                 ]
             );
 
@@ -82,9 +82,9 @@ class NestedQueryTest extends TestCase
                     'query' => ['query'],
                     'inner_hits' => [
                         'size' => 10,
-                        'name' => 'test'
-                    ]
-                ]
+                        'name' => 'test',
+                    ],
+                ],
             ],
             $this->nestedQuery->innerHits($innerHitsMock)->toArray()
         );
