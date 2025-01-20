@@ -2,6 +2,15 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.3.0 - 2025-01-20
+
+### What's Changed
+
+* Add boost parameter to Terms query by @floristenhove in https://github.com/spatie/elasticsearch-query-builder/pull/54
+* Nested query improvements by @dam-bal in https://github.com/spatie/elasticsearch-query-builder/pull/53
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.2.2...3.3.0
+
 ## 3.2.2 - 2025-01-17
 
 ### What's Changed
