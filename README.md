@@ -121,6 +121,29 @@ The following query types are available:
 );
 ```
 
+##### `NestedQuery` `InnerHits`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/inner-hits.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/inner-hits.html)
+
+```php
+$nestedQuery = \Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery::create(
+    'comments',
+    \Spatie\ElasticsearchQueryBuilder\Queries\TermsQuery::create('comments.published', true)
+);
+
+$nestedQuery->innerHits(
+    \Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits::create('top_three_liked_comments')
+        ->size(3)
+        ->addSort(
+            \Spatie\ElasticsearchQueryBuilder\Sorts\Sort::create(
+                'comments.likes', 
+                \Spatie\ElasticsearchQueryBuilder\Sorts\Sort::DESC
+            )
+        )
+        ->fields(['comments.content', 'comments.author', 'comments.likes'])
+);
+```
+
 #### `RangeQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
