@@ -107,6 +107,11 @@ class Builder
         return $this;
     }
 
+    public function getIndex(): ?string
+    {
+        return $this->searchIndex;
+    }
+
     public function trackTotalHits(bool $value = true): static
     {
         $this->trackTotalHits = $value;
