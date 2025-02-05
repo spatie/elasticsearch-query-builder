@@ -311,6 +311,21 @@ The following query types are available:
     ->aggregation(/* $subAggregation */);
 ```
 
+#### `MultiTermsAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-multi-terms-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-multi-terms-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\MultiTermsAggregation::create(
+    'categories',
+    ['category', 'subcategory']
+)
+    ->size(10)
+    ->order(['_count' => 'asc'])
+    ->missing('N/A')
+    ->aggregation(/* $subAggregation */);
+```
+
 #### `TopHitsAggregation`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html)
