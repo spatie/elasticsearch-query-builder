@@ -4,11 +4,9 @@ namespace Spatie\ElasticsearchQueryBuilder\Tests\Builders;
 
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
-use PhpParser\Node\Expr\AssignOp\Mul;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 use Spatie\ElasticsearchQueryBuilder\MultiBuilder;
 use PHPUnit\Framework\TestCase;
-use Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\TermQuery;
 
 class MultiBuilderTest extends TestCase
