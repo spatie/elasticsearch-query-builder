@@ -29,8 +29,7 @@ class MultiBuilder
     {
         $payload = [];
         foreach ($this->builders as $builderInstance) {
-            $index = $builderInstance['index'];
-            $builder = $builderInstance['builder'];
+            ['index' => $index, 'builder' => $builder] = $builderInstance;
             $payload[] = $index ? ['index' => $index] : [];
             $payload[] = $builder->getPayload();
         }
