@@ -37,7 +37,7 @@ class MultiBuilder
         return $payload;
     }
 
-    public function multiSearch(): Elasticsearch|Promise
+    public function search(): Elasticsearch|Promise
     {
         $payload = $this->getPayload();
 
