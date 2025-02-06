@@ -16,7 +16,6 @@ class MultiBuilder
 
     public function addBuilder(Builder $builder, ?string $indexName = null): static
     {
-        // if we have a name, use the key, else just let is use numeric indices
         $this->builders[] = [
             'index' => $indexName ?? $builder->getIndex(),
             'builder' => $builder,
@@ -28,11 +27,13 @@ class MultiBuilder
     public function getPayload(): array
     {
         $payload = [];
+
         foreach ($this->builders as $builderInstance) {
             ['index' => $index, 'builder' => $builder] = $builderInstance;
             $payload[] = $index ? ['index' => $index] : [];
             $payload[] = $builder->getPayload();
         }
+
         return $payload;
     }
 
