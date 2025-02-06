@@ -383,6 +383,32 @@ $builder
     );
 ```
 
+### "Terms" Sort
+
+Used in `terms` and `multi_terms` aggregations, generates as a simple `['field' => 'order']` pair. The `field` can be the field name in a `terms` agg, or a sub-agg name, or `_key` or `_count`.
+
+Elastic warns that using the `order` parameter is not recommended, especially to avoid using `['_count' => 'asc']`. See the docs for more details.
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-order
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Sorts\TermsSort;
+use Spatie\ElasticsearchQueryBuilder\Aggregations\MultiTermsAggregation;
+use Spatie\ElasticsearchQueryBuilder\Aggregations\SumAggregation;
+
+$multiTermsAgg = MultiTermsAggregation::create(
+    'category_subcategory',
+    ['category', 'subcategory'],
+    10,
+    [
+        TermsSort::create('total_quantity'),
+        TermsSort::create('_key', Sorting::ASC),
+    ]
+)->aggregation(
+    SumAggregation::create('total_quantity', 'quantity')
+);
+```
+
 ## Retrieve specific fields
 
 The `fields()` method can be used to request specific fields from the resulting documents without returning the entire `_source` entry. You can read more about the specifics of the fields parameter in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-fields.html).
