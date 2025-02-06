@@ -19,7 +19,7 @@ class MultiTermsAggregation extends Aggregation
     protected ?array $order = null;
 
     /**
-     * @param  string[]  $fields
+     * @param string[] $fields
      */
     public static function create(string $name, array $fields): self
     {
@@ -27,7 +27,7 @@ class MultiTermsAggregation extends Aggregation
     }
 
     /**
-     * @param  string[]  $fields
+     * @param string[] $fields
      */
     public function __construct(string $name, array $fields)
     {
