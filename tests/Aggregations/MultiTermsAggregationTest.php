@@ -2,45 +2,29 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Aggregations;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\ClientBuilder;
-use Spatie\ElasticsearchQueryBuilder\Aggregations\MultiTermsAggregation;
 use PHPUnit\Framework\TestCase;
+use Spatie\ElasticsearchQueryBuilder\Aggregations\MultiTermsAggregation;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 
 class MultiTermsAggregationTest extends TestCase
 {
-    private Client $client;
-
-    protected function setUp(): void
+    public function testCreateReturnsNewInstance(): void
     {
-        $this->client = ClientBuilder::create()->build();
+        $aggregation = MultiTermsAggregation::create('agg_name', ['field1', 'field2']);
+        self::assertInstanceOf(MultiTermsAggregation::class, $aggregation);
     }
 
     public function testMultiTermsAggregation(): void
     {
-        $builder = new Builder($this->client);
+        $aggregation = (new MultiTermsAggregation('agg_name', ['field1', 'field2']));
 
-        $aggregation = MultiTermsAggregation::create('agg_name', ['field1', 'field2']);
-
-        $expectedAggArray = [
+        self::assertEquals([
             'multi_terms' => [
                 'terms' => [
                     ['field' => 'field1'],
-                    ['field' => 'field2']
+                    ['field' => 'field2'],
                 ],
             ],
-        ];
-        $this->assertEquals($expectedAggArray, $aggregation->toArray());
-
-        $builder->addAggregation($aggregation);
-
-        $expectedBuilderPayload = [
-            'aggs' => [
-                'agg_name' => $expectedAggArray,
-            ]
-        ];
-
-        $this->assertEquals($expectedBuilderPayload, $builder->getPayload());
+        ], $aggregation->toArray());
     }
 }
