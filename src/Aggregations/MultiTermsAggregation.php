@@ -55,6 +55,7 @@ class MultiTermsAggregation extends Aggregation
         foreach($this->fields as $field) {
             $terms[] = ['field' => $field];
         }
+
         $parameters = [
             'terms' => $terms,
         ];
