@@ -11,7 +11,7 @@ class MultiTermsAggregation extends Aggregation
     use WithMissing;
     use WithAggregations;
 
-    /** @var string[]  */
+    /** @var string[] */
     protected array $fields;
 
     protected ?int $size = null;
@@ -19,15 +19,16 @@ class MultiTermsAggregation extends Aggregation
     protected ?array $order = null;
 
     /**
-     * @param  string  $name
      * @param  string[]  $fields
-     * @return self
      */
     public static function create(string $name, array $fields): self
     {
         return new self($name, $fields);
     }
 
+    /**
+     * @param  string[]  $fields
+     */
     public function __construct(string $name, array $fields)
     {
         $this->name = $name;
@@ -52,7 +53,8 @@ class MultiTermsAggregation extends Aggregation
     public function payload(): array
     {
         $terms = [];
-        foreach($this->fields as $field) {
+
+        foreach ($this->fields as $field) {
             $terms[] = ['field' => $field];
         }
 
