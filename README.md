@@ -60,6 +60,10 @@ $builder->addQuery(RangeQuery::create('age')->gte(18));
 $results = $builder->search(); // raw response from ElasticSearch
 ```
 
+#### Multi-Search Queries
+
+Multi-Search queries are also available using the [`MultiBuilder` class](#multi-search-query-builder).
+
 ## Adding queries
 
 The `$builder->addQuery()` method can be used to add any of the available `Query` types to the builder. The available query types can be found below or in the `src/Queries` directory of this repo. Every `Query` has a static `create()` method to pass its most important parameters.
@@ -416,6 +420,42 @@ $pageResults = (new Builder(Elastic\Elasticsearch\ClientBuilder::create()))
     ->size($pageSize)
     ->from(($pageNumber - 1) * $pageSize)
     ->search();
+```
+
+## Multi-Search Query Builder
+
+Elasticsearch provides a ["multi-search" API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html) that allows for multiple query bodies to be included in a single request.
+
+Use the `MultiBuilder` class and [add builders](#add-builders) to add builders to your query request. The response will include a `responses` array of the query results, in the same order the requests are added. Use the `$multiBuilder->search()` to execute the queries, or `$multiBuilder->getPayload()` for the raw request payload.
+
+```php
+use Spatie\ElasticsearchQueryBuilder\MultiBuilder;
+use Spatie\ElasticsearchQueryBuilder\Builder;
+
+$client = Elastic\Elasticsearch\ClientBuilder::create();
+$multiBuilder = (new MultiBuilder($client));
+
+$multiBuilder->addBuilder(
+    (new Builder($client))->index('custom_index')->size(10)
+);
+// you can pass the index name to the addBuilder method second param
+$multiBuilder->addBuilder(
+    (new Builder($client))->size(10)
+    'different_index'
+);
+
+$multiResults = $multiBuilder->search();
+```
+
+Returns the following response JSON shape:
+```
+{
+    "took": 2,
+    "responses": [
+        {... first query result ...},
+        {... second query result ...},
+    ]
+}
 ```
 
 ## Testing
