@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.4.0 - 2025-02-10
+
+### What's Changed
+
+* Add MultiBuilder to support multi-search API  by @chrispappas in https://github.com/spatie/elasticsearch-query-builder/pull/64
+
+### New Contributors
+
+* @chrispappas made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/64
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.3.0...3.4.0
+
 ## 3.3.0 - 2025-01-20
 
 ### What's Changed
