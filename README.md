@@ -205,6 +205,8 @@ $nestedQuery->innerHits(
 
 The `collapse` feature allows grouping search results by a specific field while retrieving top documents from each group using `inner_hits`. This is useful for avoiding duplicate entities in search results while still accessing grouped data.
 
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/collapse-search-results.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/collapse-search-results.html)
+
 ```php
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
 use Spatie\ElasticsearchQueryBuilder\Builder;
