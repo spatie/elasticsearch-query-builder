@@ -5,15 +5,32 @@ namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 use PHPUnit\Framework\TestCase;
 use Elastic\Elasticsearch\Client;
 use Spatie\ElasticsearchQueryBuilder\Builder;
+use Elastic\Transport\TransportBuilder;
+use Psr\Log\LoggerInterface;
 
 class CollapseTest extends TestCase
 {
+
+    private Builder $builder;
+
+    private Client $client;
+
+    protected function setUp(): void
+    {
+        $transport = TransportBuilder::create()
+            ->setClient(new \Http\Mock\Client())
+            ->build();
+
+        $logger = $this->createStub(LoggerInterface::class);
+
+        $this->client = new Client($transport, $logger);
+
+        $this->builder = new Builder($this->client);
+    }
+
     public function testCollapseIsAddedToPayload()
     {
-        $mockClient = $this->createMock(Client::class);
-        $builder = new Builder($mockClient);
-
-        $builder->collapse(
+        $this->builder->collapse(
             'user_id',
             [
                 'name' => 'top_comments',
@@ -27,7 +44,7 @@ class CollapseTest extends TestCase
             10,
         );
 
-        $payload = $builder->getPayload();
+        $payload = $this->builder->getPayload();
 
         $expectedCollapse = [
             'field' => 'user_id',
