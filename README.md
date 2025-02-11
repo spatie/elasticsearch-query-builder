@@ -43,7 +43,7 @@ composer require spatie/elasticsearch-query-builder
 
 ## Basic usage
 
-The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class. It requires an `\Elastic\Elasticsearch\Client` passed in the constructor. Take a look at the [ElasticSearch SDK docs](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/installation.html) to learn more about connecting to your ElasticSearch cluster. 
+The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class. It requires an `\Elastic\Elasticsearch\Client` passed in the constructor. Take a look at the [ElasticSearch SDK docs](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/installation.html) to learn more about connecting to your ElasticSearch cluster.
 
 The `Builder` class contains some methods to [add queries](#adding-queries), [aggregations](#adding-aggregations), [sorts](#adding-sorts), [fields](#retrieve-specific-fields) and some extras for [pagination](#pagination). You can read more about these methods below. Once you've fully built-up the query you can use `$builder->search()` to execute the query or `$builder->getPayload()` to get the raw payload for ElasticSearch.
 
@@ -84,11 +84,11 @@ The following query types are available:
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::create(
-  'location', 
-  \Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::TYPE_POLYGON, 
-  [[1.0, 2.0]], 
+  'location',
+  \Spatie\ElasticsearchQueryBuilder\Queries\GeoshapeQuery::TYPE_POLYGON,
+  [[1.0, 2.0]],
   \Spatie\ElasticsearchQueryBuilder\Queries\GeoShapeQuery::RELATION_INTERSECTS,
-); 
+);
 ```
 
 #### `MatchQuery`
@@ -100,6 +100,7 @@ The following query types are available:
 ```
 
 #### `MatchPhraseQuery`
+
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)
 
 ```php
@@ -120,7 +121,7 @@ The following query types are available:
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery::create(
-    'user', 
+    'user',
     new \Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery('name', 'john')
 );
 ```
@@ -140,7 +141,7 @@ $nestedQuery->innerHits(
         ->size(3)
         ->addSort(
             \Spatie\ElasticsearchQueryBuilder\Sorts\Sort::create(
-                'comments.likes', 
+                'comments.likes',
                 \Spatie\ElasticsearchQueryBuilder\Sorts\Sort::DESC
             )
         )
@@ -200,6 +201,35 @@ $nestedQuery->innerHits(
     ->add($existsQuery, 'must_not');
 ```
 
+#### `collapse`
+
+The `collapse` feature allows grouping search results by a specific field while retrieving top documents from each group using `inner_hits`. This is useful for avoiding duplicate entities in search results while still accessing grouped data.
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
+use Spatie\ElasticsearchQueryBuilder\Builder;
+
+// Initialize ExtendedBuilder with an Elasticsearch client
+$builder = new Builder($client);
+
+// Apply collapse to group by 'user_id'
+$builder->collapse(
+    'user_id', // Field to collapse on
+    [
+        'name' => 'top_three_liked_posts',
+        'size' => 3, // Retrieve top 3 posts per user
+        'sort' => [
+            Sort::create('post.likes', Sort::DESC), // Sort posts by likes (descending)
+        ],
+        'fields' => ['post.title', 'post.content', 'post.likes'], // Select specific fields
+    ],
+    10, // Max concurrent group searches
+);
+
+// Execute the search
+$response = $builder->search();
+```
+
 ### Chaining multiple queries
 
 Multiple `addQuery()` calls can be chained on one `Builder`. Under the hood they'll be added to a `BoolQuery` with occurrence type `must`. By passing a second argument to the `addQuery()` method you can select a different occurrence type:
@@ -207,7 +237,7 @@ Multiple `addQuery()` calls can be chained on one `Builder`. Under the hood they
 ```php
 $builder
     ->addQuery(
-        MatchQuery::create('name', 'billie'), 
+        MatchQuery::create('name', 'billie'),
         'must_not' // available types: must, must_not, should, filter
     )
     ->addQuery(
@@ -344,7 +374,7 @@ $builder
 
 ### Nested sort
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples)
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#\_nested_sorting_examples](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html#_nested_sorting_examples)
 
 ```php
 use Spatie\ElasticsearchQueryBuilder\Sorts\NestedSort;
@@ -365,8 +395,8 @@ use Spatie\ElasticsearchQueryBuilder\Queries\TermQuery;
 $builder
     ->addSort(
         NestedSort::create(
-            'books', 
-            'books.rating', 
+            'books',
+            'books.rating',
             NestedSort::ASC
         )->filter(BoolQuery::create()->add(TermQuery::create('books.category', 'comedy'))
     );
@@ -448,6 +478,7 @@ $multiResults = $multiBuilder->search();
 ```
 
 Returns the following response JSON shape:
+
 ```
 {
     "took": 2,
@@ -478,9 +509,9 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Alex Vanderbist](https://github.com/alexvanderbist)
-- [Ruben Van Assche](https://github.com/rubenvanassche)
-- [All Contributors](../../contributors)
+-   [Alex Vanderbist](https://github.com/alexvanderbist)
+-   [Ruben Van Assche](https://github.com/rubenvanassche)
+-   [All Contributors](../../contributors)
 
 ## License
 
