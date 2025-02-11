@@ -36,9 +36,9 @@ class Builder
 
     protected ?BoolQuery $postFilterQuery = null;
 
-    public function __construct(protected Client $client)
-    {
-    }
+    protected ?array $collapse = null;
+
+    public function __construct(protected Client $client) {}
 
     public function addQuery(Query $query, string $boolType = 'must'): static
     {
@@ -172,6 +172,22 @@ class Builder
         return $this;
     }
 
+
+    public function collapse(string $field, ?array $innerHits = null, ?int $maxConcurrentGroupRequests = null): static
+    {
+        $this->collapse = ['field' => $field];
+
+        if ($innerHits) {
+            $this->collapse['inner_hits'] = $innerHits;
+        }
+
+        if ($maxConcurrentGroupRequests !== null) {
+            $this->collapse['max_concurrent_group_searches'] = $maxConcurrentGroupRequests;
+        }
+
+        return $this;
+    }
+
     public function getPayload(): array
     {
         $payload = [];
@@ -210,6 +226,10 @@ class Builder
 
         if ($this->postFilterQuery) {
             $payload['post_filter'] = $this->postFilterQuery->toArray();
+        }
+
+        if ($this->collapse) {
+            $payload['collapse'] = $this->collapse;
         }
 
         return $payload;
