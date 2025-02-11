@@ -2,11 +2,11 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 
-use PHPUnit\Framework\TestCase;
 use Elastic\Elasticsearch\Client;
-use Spatie\ElasticsearchQueryBuilder\Builder;
 use Elastic\Transport\TransportBuilder;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Spatie\ElasticsearchQueryBuilder\Builder;
 
 class CollapseTest extends TestCase
 {
@@ -37,9 +37,9 @@ class CollapseTest extends TestCase
                 'size' => 3,
                 'sort' => [
                     [
-                        'timestamp' => 'desc'
-                    ]
-                ]
+                        'timestamp' => 'desc',
+                    ],
+                ],
             ],
             10,
         );
@@ -53,8 +53,8 @@ class CollapseTest extends TestCase
                 'size' => 3,
                 'sort' => [
                     [
-                        'timestamp' => 'desc'
-                    ]
+                        'timestamp' => 'desc',
+                    ],
                 ],
             ],
             'max_concurrent_group_searches' => 10,

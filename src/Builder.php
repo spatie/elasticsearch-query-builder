@@ -38,7 +38,9 @@ class Builder
 
     protected ?array $collapse = null;
 
-    public function __construct(protected Client $client) {}
+    public function __construct(protected Client $client)
+    {
+    }
 
     public function addQuery(Query $query, string $boolType = 'must'): static
     {
@@ -171,7 +173,6 @@ class Builder
 
         return $this;
     }
-
 
     public function collapse(string $field, ?array $innerHits = null, ?int $maxConcurrentGroupRequests = null): static
     {
