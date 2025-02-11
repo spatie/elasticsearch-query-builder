@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.5.0 - 2025-02-11
+
+### What's Changed
+
+* Add elasticsearch `collapse` on query builder by @chirag-techrayslabs in https://github.com/spatie/elasticsearch-query-builder/pull/65
+
+### New Contributors
+
+* @chirag-techrayslabs made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/65
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.4.0...3.5.0
+
 ## 3.4.0 - 2025-02-10
 
 ### What's Changed
