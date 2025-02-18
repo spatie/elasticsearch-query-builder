@@ -7,6 +7,7 @@ use Elastic\Elasticsearch\Response\Elasticsearch;
 use Http\Promise\Promise;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
 use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
+use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sorting;
 
@@ -174,11 +175,14 @@ class Builder
         return $this;
     }
 
-    public function collapse(string $field, ?array $innerHits = null, ?int $maxConcurrentGroupRequests = null): static
+    public function collapse(string $field, array|InnerHits|null $innerHits = null, ?int $maxConcurrentGroupRequests = null): static
     {
         $this->collapse = ['field' => $field];
 
         if ($innerHits) {
+            if ($innerHits instanceof InnerHits) {
+                $innerHits = $innerHits->toArray();
+            }
             $this->collapse['inner_hits'] = $innerHits;
         }
 
