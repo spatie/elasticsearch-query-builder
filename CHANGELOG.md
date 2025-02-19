@@ -2,6 +2,14 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.5.1 - 2025-02-19
+
+### What's Changed
+
+* Collapse: Make use of nested inner hits query object by @sventendo in https://github.com/spatie/elasticsearch-query-builder/pull/67
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.5.0...3.5.1
+
 ## 3.5.0 - 2025-02-11
 
 ### What's Changed
