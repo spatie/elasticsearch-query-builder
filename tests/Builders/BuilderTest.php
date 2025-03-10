@@ -72,4 +72,14 @@ class BuilderTest extends TestCase
             $builder->getPayload()
         );
     }
+
+    public function testMinScoreIsAppliedToThePayload(): void
+    {
+        $payload = (new Builder($this->client))
+            ->minScore(0.1)
+            ->getPayload();
+
+        $this->assertArrayHasKey('min_score', $payload);
+        $this->assertEquals(0.1, $payload['min_score']);
+    }
 }
