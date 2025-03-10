@@ -25,6 +25,8 @@ class Builder
 
     protected ?int $from = null;
 
+    protected ?float $minScore = null;
+
     protected ?array $searchAfter = null;
 
     protected ?array $fields = null;
@@ -136,6 +138,13 @@ class Builder
         return $this;
     }
 
+    public function minScore(float $minScore): static
+    {
+        $this->minScore = $minScore;
+
+        return $this;
+    }
+
     public function searchAfter(?array $searchAfter): static
     {
         $this->searchAfter = $searchAfter;
@@ -203,6 +212,10 @@ class Builder
 
         if ($this->size !== null) {
             $payload['size'] = $this->size;
+        }
+
+        if ($this->minScore !== null) {
+            $payload['min_score'] = $this->minScore;
         }
 
         if ($this->query) {
