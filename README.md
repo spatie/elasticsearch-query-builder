@@ -367,7 +367,8 @@ The following query types are available:
     'name',
     '@timestamp'
     '1h',
-);
+)
+    ->aggregation(/* $subAggregation */);
 ```
 
 ## Adding sorts
