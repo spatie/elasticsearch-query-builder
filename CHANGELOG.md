@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.6.0 - 2025-03-10
+
+### What's Changed
+
+* Add the min_score to the builder by @wgriffioen in https://github.com/spatie/elasticsearch-query-builder/pull/68
+
+### New Contributors
+
+* @wgriffioen made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/68
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.5.1...3.6.0
+
 ## 3.5.1 - 2025-02-19
 
 ### What's Changed
