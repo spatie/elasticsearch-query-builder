@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.7.0 - 2025-04-14
+
+### What's Changed
+
+* Add DateHistogramAggregation by @Crmteam-IVG in https://github.com/spatie/elasticsearch-query-builder/pull/66
+
+### New Contributors
+
+* @Crmteam-IVG made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/66
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.6.0...3.7.0
+
 ## 3.6.0 - 2025-03-10
 
 ### What's Changed
