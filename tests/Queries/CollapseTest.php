@@ -2,8 +2,6 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Queries;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Transport\TransportBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Spatie\ElasticsearchQueryBuilder\Builder;
@@ -13,19 +11,9 @@ class CollapseTest extends TestCase
 
     private Builder $builder;
 
-    private Client $client;
-
     protected function setUp(): void
     {
-        $transport = TransportBuilder::create()
-            ->setClient(new \Http\Mock\Client())
-            ->build();
-
-        $logger = $this->createStub(LoggerInterface::class);
-
-        $this->client = new Client($transport, $logger);
-
-        $this->builder = new Builder($this->client);
+        $this->builder = new Builder();
     }
 
     public function testCollapseIsAddedToPayload()

@@ -2,8 +2,6 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Builders;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Transport\TransportBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Spatie\ElasticsearchQueryBuilder\Builder;
@@ -12,19 +10,6 @@ use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
 
 class BuilderTest extends TestCase
 {
-    protected Client $client;
-
-    public function setUp(): void
-    {
-        $transport = TransportBuilder::create()
-            ->setClient(new \Http\Mock\Client())
-            ->build();
-
-        $logger = $this->createStub(LoggerInterface::class);
-
-        $this->client = new Client($transport, $logger);
-    }
-
     public function testGeneratesCollapseWithPlainArrayData(): void
     {
         $innerHits = [
@@ -35,7 +20,7 @@ class BuilderTest extends TestCase
             ],
         ];
 
-        $builder = (new Builder($this->client))
+        $builder = (new Builder())
             ->collapse('group_id', $innerHits);
 
         self::assertEquals(
@@ -50,7 +35,7 @@ class BuilderTest extends TestCase
             ->size(1)
             ->addSort(new Sort('name.keyword', 'asc'));
 
-        $builder = (new Builder($this->client))
+        $builder = (new Builder())
             ->collapse('group_id', $innerHits);
 
         self::assertEquals(
@@ -75,7 +60,7 @@ class BuilderTest extends TestCase
 
     public function testMinScoreIsAppliedToThePayload(): void
     {
-        $payload = (new Builder($this->client))
+        $payload = (new Builder())
             ->minScore(0.1)
             ->getPayload();
 

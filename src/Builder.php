@@ -2,9 +2,6 @@
 
 namespace Spatie\ElasticsearchQueryBuilder;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\Response\Elasticsearch;
-use Http\Promise\Promise;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
 use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
@@ -41,7 +38,7 @@ class Builder
 
     protected ?array $collapse = null;
 
-    public function __construct(protected Client $client)
+    public function __construct()
     {
     }
 
@@ -78,7 +75,7 @@ class Builder
         return $this;
     }
 
-    public function search(): Elasticsearch|Promise
+    public function params(): array
     {
         $payload = $this->getPayload();
 
@@ -102,7 +99,7 @@ class Builder
             $params['track_total_hits'] = true;
         }
 
-        return $this->client->search($params);
+        return $params;
     }
 
     public function index(string $searchIndex): static

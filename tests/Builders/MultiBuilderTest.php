@@ -2,8 +2,6 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Builders;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Transport\TransportBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Spatie\ElasticsearchQueryBuilder\Builder;
@@ -18,15 +16,7 @@ class MultiBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $transport = TransportBuilder::create()
-            ->setClient(new \Http\Mock\Client())
-            ->build();
-
-        $logger = $this->createStub(LoggerInterface::class);
-
-        $this->client = new Client($transport, $logger);
-
-        $this->multiBuilder = new MultiBuilder($this->client);
+        $this->multiBuilder = new MultiBuilder();
     }
 
     public function testEmptyPayloadGeneratesCorrectly(): void
@@ -37,7 +27,7 @@ class MultiBuilderTest extends TestCase
     public function testSingleBuilderPayloadGeneratesCorrectly(): void
     {
         $this->multiBuilder->addBuilder(
-            (new Builder($this->client))->addQuery(TermQuery::create('test', 'value'))
+            (new Builder())->addQuery(TermQuery::create('test', 'value'))
         );
 
         $payload = $this->multiBuilder->getPayload();
@@ -62,12 +52,12 @@ class MultiBuilderTest extends TestCase
     public function testMultipleBuilderPayloadGeneratesCorrectly(): void
     {
         $this->multiBuilder->addBuilder(
-            (new Builder($this->client))
+            (new Builder())
                 ->index('firstIndex')
                 ->addQuery(TermQuery::create('keyword', 'value'), 'filter'),
         );
         $this->multiBuilder->addBuilder(
-            (new Builder($this->client))
+            (new Builder())
                 ->addQuery(TermQuery::create('keyword', 'value'), 'filter'),
             'secondIndex'
         );
