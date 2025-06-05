@@ -49,9 +49,13 @@ class BoolQuery implements Query
             $bool["minimum_should_match"] = $this->minimumShouldMatch;
         }
 
-
         return [
             'bool' => array_filter($bool),
         ];
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->must) && empty($this->filter) && empty($this->should) && empty($this->must_not);
     }
 }
