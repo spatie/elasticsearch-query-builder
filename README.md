@@ -15,11 +15,12 @@ use Spatie\ElasticsearchQueryBuilder\Queries\MatchQuery;
 
 $client = Elastic\Elasticsearch\ClientBuilder::create()->build();
 
-$companies = (new Builder($client))
+$query = (new Builder())
     ->index('companies')
     ->addQuery(MatchQuery::create('name', 'spatie', fuzziness: 3))
     ->addAggregation(MaxAggregation::create('score'))
-    ->search();
+    ->params();
+$companies = $client->search($query);
 ```
 
 ## Support us
@@ -43,9 +44,9 @@ composer require spatie/elasticsearch-query-builder
 
 ## Basic usage
 
-The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class. It requires an `\Elastic\Elasticsearch\Client` passed in the constructor. Take a look at the [ElasticSearch SDK docs](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/installation.html) to learn more about connecting to your ElasticSearch cluster.
+The only class you really need to interact with is the `Spatie\ElasticsearchQueryBuilder\Builder` class.
 
-The `Builder` class contains some methods to [add queries](#adding-queries), [aggregations](#adding-aggregations), [sorts](#adding-sorts), [fields](#retrieve-specific-fields) and some extras for [pagination](#pagination). You can read more about these methods below. Once you've fully built-up the query you can use `$builder->search()` to execute the query or `$builder->getPayload()` to get the raw payload for ElasticSearch.
+The `Builder` class contains some methods to [add queries](#adding-queries), [aggregations](#adding-aggregations), [sorts](#adding-sorts), [fields](#retrieve-specific-fields) and some extras for [pagination](#pagination). You can read more about these methods below. Once you've fully built-up the query you can use `$builder->params()` to get the full payload for ElasticSearch.
 
 ```php
 use Spatie\ElasticsearchQueryBuilder\Queries\RangeQuery;
@@ -53,11 +54,12 @@ use Spatie\ElasticsearchQueryBuilder\Builder;
 
 $client = Elastic\Elasticsearch\ClientBuilder::create()->build();
 
-$builder = new Builder($client);
+$builder = new Builder();
 
 $builder->addQuery(RangeQuery::create('age')->gte(18));
 
-$results = $builder->search(); // raw response from ElasticSearch
+$params = $builder->params(); 
+$results = $client->search($params); // raw response from ElasticSearch
 ```
 
 #### Multi-Search Queries
@@ -212,7 +214,7 @@ use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 
 // Initialize ExtendedBuilder with an Elasticsearch client
-$builder = new Builder($client);
+$builder = new Builder();
 
 // Apply collapse to group by 'user_id'
 $builder->collapse(
@@ -229,7 +231,8 @@ $builder->collapse(
 );
 
 // Execute the search
-$response = $builder->search();
+$params = $builder->params();
+$response = $client->search($params);
 ```
 
 ### Chaining multiple queries
@@ -257,9 +260,11 @@ The `$builder->addAggregation()` method can be used to add any of the available 
 use Spatie\ElasticsearchQueryBuilder\Aggregations\TermsAggregation;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 
-$results = (new Builder(Elastic\Elasticsearch\ClientBuilder::create()->build()))
+$client = Elastic\Elasticsearch\ClientBuilder::create()->build();
+$params = (new Builder())
     ->addAggregation(TermsAggregation::create('genres', 'genre'))
-    ->search();
+    ->params();
+$results = $client->search($params);
 
 $genres = $results['aggregations']['genres']['buckets'];
 ```
@@ -460,11 +465,12 @@ use Spatie\ElasticsearchQueryBuilder\Builder;
 
 $pageSize = 100;
 $pageNumber = $_GET['page'] ?? 1;
-
-$pageResults = (new Builder(Elastic\Elasticsearch\ClientBuilder::create()))
+$client = Elastic\Elasticsearch\ClientBuilder::create();
+$pageResults = (new Builder())
     ->size($pageSize)
     ->from(($pageNumber - 1) * $pageSize)
-    ->search();
+    ->params();
+$pageResults = $client->search($params);
 ```
 
 ## Multi-Search Query Builder
@@ -478,18 +484,19 @@ use Spatie\ElasticsearchQueryBuilder\MultiBuilder;
 use Spatie\ElasticsearchQueryBuilder\Builder;
 
 $client = Elastic\Elasticsearch\ClientBuilder::create();
-$multiBuilder = (new MultiBuilder($client));
+$multiBuilder = (new MultiBuilder());
 
 $multiBuilder->addBuilder(
-    (new Builder($client))->index('custom_index')->size(10)
+    (new Builder())->index('custom_index')->size(10)
 );
 // you can pass the index name to the addBuilder method second param
 $multiBuilder->addBuilder(
-    (new Builder($client))->size(10)
+    (new Builder())->size(10)
     'different_index'
 );
 
-$multiResults = $multiBuilder->search();
+$params = $multiBuilder->search();
+$multiResults = $client->msearch($params);
 ```
 
 Returns the following response JSON shape:

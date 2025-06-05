@@ -25,9 +25,7 @@
         "php": "^8.0"
     },
     "require-dev": {
-        "elasticsearch/elasticsearch": "^8.0",
         "friendsofphp/php-cs-fixer": "^2.17",
-        "php-http/mock-client": "^1.5",
         "phpunit/phpunit": "^9.5",
         "spatie/ray": "^1.10",
         "vimeo/psalm": "^4.3"

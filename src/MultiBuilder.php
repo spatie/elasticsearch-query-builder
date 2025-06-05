@@ -2,17 +2,9 @@
 
 namespace Spatie\ElasticsearchQueryBuilder;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\Response\Elasticsearch;
-use Http\Promise\Promise;
-
 class MultiBuilder
 {
     protected ?array $builders = [];
-
-    public function __construct(protected Client $client)
-    {
-    }
 
     public function addBuilder(Builder $builder, ?string $indexName = null): static
     {
@@ -37,7 +29,7 @@ class MultiBuilder
         return $payload;
     }
 
-    public function search(): Elasticsearch|Promise
+    public function params(): array
     {
         $payload = $this->getPayload();
 
@@ -45,6 +37,6 @@ class MultiBuilder
             'body' => $payload,
         ];
 
-        return $this->client->msearch($params);
+        return $params;
     }
 }
