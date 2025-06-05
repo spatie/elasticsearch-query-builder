@@ -2,6 +2,14 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.8.0 - 2025-06-05
+
+### What's Changed
+
+* Add operator, boost, prefix length, and max expansions to MultiMatchQuery by @floristenhove in https://github.com/spatie/elasticsearch-query-builder/pull/71
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.7.0...3.8.0
+
 ## 3.7.0 - 2025-04-14
 
 ### What's Changed
