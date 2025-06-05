@@ -201,6 +201,16 @@ $nestedQuery->innerHits(
     ->add($existsQuery, 'must_not');
 ```
 
+#### `RawQuery`
+
+This query can be used as a catch-all for any raw query that you want to add to the builder. It accepts an array which will be added to the query body as-is.
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\RawQuery::create([
+    'foo' => 'bar',
+])
+```
+
 #### `collapse`
 
 The `collapse` feature allows grouping search results by a specific field while retrieving top documents from each group using `inner_hits`. This is useful for avoiding duplicate entities in search results while still accessing grouped data.
