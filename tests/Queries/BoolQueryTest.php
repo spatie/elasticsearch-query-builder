@@ -97,7 +97,6 @@ final class BoolQueryTest extends TestCase
         ], $query->toArray());
     }
 
-
     public function testMinimumShouldMatch(): void
     {
         $query = BoolQuery::create()
