@@ -10,7 +10,6 @@ use Spatie\ElasticsearchQueryBuilder\Builder;
 
 class CollapseTest extends TestCase
 {
-
     private Builder $builder;
 
     private Client $client;
