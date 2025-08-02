@@ -23,15 +23,22 @@ class Sort implements Sorting
 
     public function toArray(): array
     {
-        return [
-            $this->field => array_filter(
-                [
+        $payload = array_filter(
+            [
                     'order' => $this->order,
                     'missing' => $this->missing,
                     'unmapped_type' => $this->unmappedType,
                     'mode' => $this->mode,
-                ]
-            ),
+            ]
+        );
+
+        // missing can be empty string or zero value
+        if ($this->missing !== null) {
+            $payload['missing'] = $this->missing;
+        }
+
+        return [
+            $this->field => $payload,
         ];
     }
 }
