@@ -321,6 +321,17 @@ The following query types are available:
 );
 ```
 
+#### `PercentilesAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\PercentilesAggregation::create('load_time_outlier', 'load_time',[95, 99, 99.9])
+    ->compression(200)
+    ->method('tdigest')
+    ->missing('10');
+```
+
 #### `ReverseNestedAggregation`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html)
