@@ -3,8 +3,8 @@
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Aggregations;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\ElasticsearchQueryBuilder\Aggregations\HistogramAggregation;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\AvgAggregation;
+use Spatie\ElasticsearchQueryBuilder\Aggregations\HistogramAggregation;
 
 class HistogramAggregationTest extends TestCase
 {
