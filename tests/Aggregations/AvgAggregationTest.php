@@ -39,7 +39,7 @@ class AvgAggregationTest extends TestCase
     public function testWithMissing(): void
     {
         $aggregation = AvgAggregation::create('avg_price', 'price')
-            ->missing('0');
+            ->missing(0);
 
         self::assertEquals([
             'avg' => [
