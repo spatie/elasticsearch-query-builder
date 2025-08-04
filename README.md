@@ -78,6 +78,14 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Queries\ExistsQuery::create('terms_and_conditions');
 ```
 
+#### `FuzzyQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\FuzzyQuery::create('name', 'john', fuzziness: 2, boost: 1.5);
+```
+
 #### `GeoshapeQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html);
@@ -89,6 +97,22 @@ The following query types are available:
   [[1.0, 2.0]],
   \Spatie\ElasticsearchQueryBuilder\Queries\GeoShapeQuery::RELATION_INTERSECTS,
 );
+```
+
+#### `IdsQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\IdsQuery::create(['user123', 'post456']);
+```
+
+#### `MatchAllQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchAllQuery::create(boost: 1.2);
 ```
 
 #### `MatchQuery`
@@ -113,6 +137,14 @@ The following query types are available:
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MultiMatchQuery::create('john', ['email', 'email'], fuzziness: 'auto');
+```
+
+#### `MatchNoneQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-none-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-none-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\MatchNoneQuery::create();
 ```
 
 #### `NestedQuery`
@@ -157,6 +189,14 @@ $nestedQuery->innerHits(
 \Spatie\ElasticsearchQueryBuilder\Queries\RangeQuery::create('age')
     ->gte(18)
     ->lte(1337);
+```
+
+#### `RegexpQuery`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Queries\RegexpQuery::create('name', 'joh.*', flags: 'ALL', maxDeterminizedStates: 10000);
 ```
 
 #### `TermQuery`
@@ -272,6 +312,14 @@ The following query types are available:
 \Spatie\ElasticsearchQueryBuilder\Aggregations\CardinalityAggregation::create('team_agg', 'team_name');
 ```
 
+#### `AvgAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\AvgAggregation::create('avg_price', 'price');
+```
+
 #### `FilterAggregation`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html)
@@ -282,6 +330,16 @@ The following query types are available:
     \Spatie\ElasticsearchQueryBuilder\Queries\TermQuery::create('type', 'tshirt'),
     \Spatie\ElasticsearchQueryBuilder\Aggregations\MaxAggregation::create('max_price', 'price')
 );
+```
+
+#### `HistogramAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html)
+
+```php
+\Spatie\ElasticsearchQueryBuilder\Aggregations\HistogramAggregation::create('price_histogram', 'price', 50)
+    ->minDocCount(1)
+    ->missing(0);
 ```
 
 #### `MaxAggregation`
