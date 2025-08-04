@@ -53,7 +53,7 @@ class TermsAggregation extends Aggregation
             $parameters['size'] = $this->size;
         }
 
-        if ($this->missing) {
+        if ($this->missing !== null) {
             $parameters['missing'] = $this->missing;
         }
 

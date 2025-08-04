@@ -61,23 +61,29 @@ class NestedSort implements Sorting
 
     public function toArray(): array
     {
+        $payload = array_filter(
+            [
+                'order' => $this->order,
+                'mode' => $this->mode,
+                'unmapped_type' => $this->unmappedType,
+                'nested' => array_filter(
+                    [
+                        'path' => $this->path,
+                        'filter' => $this->filter?->toArray(),
+                        'nested' => $this->nested?->toArray(),
+                        'max_children' => $this->maxChildren,
+                    ]
+                ),
+            ]
+        );
+
+        // missing can be empty string or zero value
+        if ($this->missing !== null) {
+            $payload['missing'] = $this->missing;
+        }
+
         return [
-            $this->field => array_filter(
-                [
-                    'order' => $this->order,
-                    'mode' => $this->mode,
-                    'missing' => $this->missing,
-                    'unmapped_type' => $this->unmappedType,
-                    'nested' => array_filter(
-                        [
-                            'path' => $this->path,
-                            'filter' => $this->filter?->toArray(),
-                            'nested' => $this->nested?->toArray(),
-                            'max_children' => $this->maxChildren,
-                        ]
-                    ),
-                ]
-            ),
+            $this->field => $payload,
         ];
     }
 }
