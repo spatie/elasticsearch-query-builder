@@ -66,7 +66,6 @@ class PercentilesAggregationTest extends TestCase
         ], $aggregation->toArray());
     }
 
-
     public function testWithMissing(): void
     {
         $aggregation = PercentilesAggregation::create('test_name', 'test_field', [50])
