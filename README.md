@@ -83,7 +83,7 @@ The following query types are available:
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)
 
 ```php
-\Spatie\ElasticsearchQueryBuilder\Queries\FuzzyQuery::create('name', 'john', fuzziness: 2, boost: 1.5);
+\Spatie\ElasticsearchQueryBuilder\Queries\FuzzyQuery::create('name', 'john', fuzziness: 2, boost: 1.5, rewrite: 'constant_score_blended');
 ```
 
 #### `GeoshapeQuery`
@@ -196,7 +196,7 @@ $nestedQuery->innerHits(
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
 
 ```php
-\Spatie\ElasticsearchQueryBuilder\Queries\RegexpQuery::create('name', 'joh.*', flags: 'ALL', maxDeterminizedStates: 10000);
+\Spatie\ElasticsearchQueryBuilder\Queries\RegexpQuery::create('name', 'joh.*', flags: 'ALL', maxDeterminizedStates: 10000, rewrite: 'constant_score');
 ```
 
 #### `TermQuery`
@@ -339,6 +339,7 @@ The following query types are available:
 ```php
 \Spatie\ElasticsearchQueryBuilder\Aggregations\HistogramAggregation::create('price_histogram', 'price', 50)
     ->minDocCount(1)
+    ->hardBounds(0, 1000)
     ->missing(0);
 ```
 
@@ -384,10 +385,10 @@ The following query types are available:
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html)
 
 ```php
-\Spatie\ElasticsearchQueryBuilder\Aggregations\PercentilesAggregation::create('load_time_outlier', 'load_time',[95, 99, 99.9])
-    ->compression(200)
-    ->method('tdigest')
-    ->missing('10');
+\Spatie\ElasticsearchQueryBuilder\Aggregations\PercentilesAggregation::create('load_time_outlier', 'load_time', [95, 99, 99.9])
+    ->keyed(false)
+    ->tdigest(200, 'high_accuracy')
+    ->missing(10);
 ```
 
 #### `ReverseNestedAggregation`
