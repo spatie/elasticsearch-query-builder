@@ -66,19 +66,6 @@ class PercentilesAggregationTest extends TestCase
         ], $aggregation->toArray());
     }
 
-    public function testWithMethod(): void
-    {
-        $aggregation = PercentilesAggregation::create('test_name', 'test_field', [50])
-            ->method('hdr');
-
-        self::assertEquals([
-            'percentiles' => [
-                'field' => 'test_field',
-                'percents' => [50],
-                'method' => 'hdr',
-            ],
-        ], $aggregation->toArray());
-    }
 
     public function testWithMissing(): void
     {
@@ -98,7 +85,6 @@ class PercentilesAggregationTest extends TestCase
     {
         $aggregation = PercentilesAggregation::create('test_name', 'test_field', [25, 50, 75])
             ->compression(1000)
-            ->method('tdigest')
             ->missing('10');
 
         self::assertEquals([
@@ -108,7 +94,6 @@ class PercentilesAggregationTest extends TestCase
                 'tdigest' => [
                     'compression' => 1000,
                 ],
-                'method' => 'tdigest',
                 'missing' => '10',
             ],
         ], $aggregation->toArray());
@@ -143,6 +128,74 @@ class PercentilesAggregationTest extends TestCase
             ],
             'meta' => [
                 'description' => 'Response time percentiles',
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testWithKeyed(): void
+    {
+        $aggregation = PercentilesAggregation::create('response_time_percentiles', 'response_time', [95, 99])
+            ->keyed(false);
+
+        self::assertEquals([
+            'percentiles' => [
+                'field' => 'response_time',
+                'percents' => [95, 99],
+                'keyed' => false,
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testWithTdigest(): void
+    {
+        $aggregation = PercentilesAggregation::create('load_time_percentiles', 'load_time', [50, 95, 99])
+            ->tdigest(200, 'high_accuracy');
+
+        self::assertEquals([
+            'percentiles' => [
+                'field' => 'load_time',
+                'percents' => [50, 95, 99],
+                'tdigest' => [
+                    'compression' => 200,
+                    'execution_hint' => 'high_accuracy',
+                ],
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testWithHdr(): void
+    {
+        $aggregation = PercentilesAggregation::create('latency_percentiles', 'latency', [95, 99, 99.9])
+            ->hdr(3);
+
+        self::assertEquals([
+            'percentiles' => [
+                'field' => 'latency',
+                'percents' => [95, 99, 99.9],
+                'hdr' => [
+                    'number_of_significant_value_digits' => 3,
+                ],
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testWithAllNewFeatures(): void
+    {
+        $aggregation = PercentilesAggregation::create('comprehensive_percentiles', 'score', [25, 50, 75, 95, 99])
+            ->keyed(false)
+            ->tdigest(300, 'high_accuracy')
+            ->missing(0);
+
+        self::assertEquals([
+            'percentiles' => [
+                'field' => 'score',
+                'percents' => [25, 50, 75, 95, 99],
+                'keyed' => false,
+                'tdigest' => [
+                    'compression' => 300,
+                    'execution_hint' => 'high_accuracy',
+                ],
+                'missing' => 0,
             ],
         ], $aggregation->toArray());
     }

@@ -174,4 +174,35 @@ class RegexpQueryTest extends TestCase
             ],
         ], $query->toArray());
     }
+
+    public function testWithRewrite(): void
+    {
+        $query = new RegexpQuery('path', '/home/user/.*\.txt', null, null, null, 'constant_score_blended');
+
+        self::assertEquals([
+            'regexp' => [
+                'path' => [
+                    'value' => '/home/user/.*\.txt',
+                    'rewrite' => 'constant_score_blended',
+                ],
+            ],
+        ], $query->toArray());
+    }
+
+    public function testWithAllParameters(): void
+    {
+        $query = new RegexpQuery('content', '[a-z]+', 'CASE_INSENSITIVE|DOTALL', 10000, 2.0, 'constant_score');
+
+        self::assertEquals([
+            'regexp' => [
+                'content' => [
+                    'value' => '[a-z]+',
+                    'flags' => 'CASE_INSENSITIVE|DOTALL',
+                    'max_determinized_states' => 10000,
+                    'boost' => 2.0,
+                    'rewrite' => 'constant_score',
+                ],
+            ],
+        ], $query->toArray());
+    }
 }

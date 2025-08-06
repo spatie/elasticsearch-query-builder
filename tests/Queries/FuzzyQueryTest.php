@@ -162,4 +162,37 @@ class FuzzyQueryTest extends TestCase
             ],
         ], $query->toArray());
     }
+
+    public function testWithRewrite(): void
+    {
+        $query = new FuzzyQuery('name', 'john', null, null, null, null, null, 'constant_score_blended');
+
+        self::assertEquals([
+            'fuzzy' => [
+                'name' => [
+                    'value' => 'john',
+                    'rewrite' => 'constant_score_blended',
+                ],
+            ],
+        ], $query->toArray());
+    }
+
+    public function testWithAllParameters(): void
+    {
+        $query = new FuzzyQuery('name', 'john', 'AUTO', 50, 2, true, 1.5, 'constant_score');
+
+        self::assertEquals([
+            'fuzzy' => [
+                'name' => [
+                    'value' => 'john',
+                    'fuzziness' => 'AUTO',
+                    'max_expansions' => 50,
+                    'prefix_length' => 2,
+                    'transpositions' => true,
+                    'boost' => 1.5,
+                    'rewrite' => 'constant_score',
+                ],
+            ],
+        ], $query->toArray());
+    }
 }

@@ -205,4 +205,49 @@ class HistogramAggregationTest extends TestCase
             ],
         ], $aggregation->toArray());
     }
+
+    public function testWithHardBounds(): void
+    {
+        $aggregation = HistogramAggregation::create('price_histogram', 'price', 10.0)
+            ->hardBounds(0.0, 100.0);
+
+        self::assertEquals([
+            'histogram' => [
+                'field' => 'price',
+                'interval' => 10.0,
+                'hard_bounds' => [
+                    'min' => 0.0,
+                    'max' => 100.0,
+                ],
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testWithAllParameters(): void
+    {
+        $aggregation = HistogramAggregation::create('comprehensive_histogram', 'value', 5.0)
+            ->minDocCount(2)
+            ->extendedBounds(-5.0, 50.0)
+            ->hardBounds(0.0, 40.0)
+            ->offset(1.0)
+            ->missing(0);
+
+        self::assertEquals([
+            'histogram' => [
+                'field' => 'value',
+                'interval' => 5.0,
+                'min_doc_count' => 2,
+                'extended_bounds' => [
+                    'min' => -5.0,
+                    'max' => 50.0,
+                ],
+                'hard_bounds' => [
+                    'min' => 0.0,
+                    'max' => 40.0,
+                ],
+                'offset' => 1.0,
+                'missing' => 0,
+            ],
+        ], $aggregation->toArray());
+    }
 }

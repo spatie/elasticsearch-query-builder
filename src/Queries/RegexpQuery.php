@@ -9,9 +9,10 @@ class RegexpQuery implements Query
         string $value,
         ?string $flags = null,
         ?int $maxDeterminizedStates = null,
-        ?float $boost = null
+        ?float $boost = null,
+        ?string $rewrite = null
     ): self {
-        return new self($field, $value, $flags, $maxDeterminizedStates, $boost);
+        return new self($field, $value, $flags, $maxDeterminizedStates, $boost, $rewrite);
     }
 
     public function __construct(
@@ -19,7 +20,8 @@ class RegexpQuery implements Query
         protected string $value,
         protected ?string $flags = null,
         protected ?int $maxDeterminizedStates = null,
-        protected ?float $boost = null
+        protected ?float $boost = null,
+        protected ?string $rewrite = null
     ) {
     }
 
@@ -43,6 +45,10 @@ class RegexpQuery implements Query
 
         if ($this->boost !== null) {
             $regexp['regexp'][$this->field]['boost'] = $this->boost;
+        }
+
+        if ($this->rewrite !== null) {
+            $regexp['regexp'][$this->field]['rewrite'] = $this->rewrite;
         }
 
         return $regexp;

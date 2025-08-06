@@ -11,9 +11,10 @@ class FuzzyQuery implements Query
         ?int $maxExpansions = null,
         ?int $prefixLength = null,
         ?bool $transpositions = null,
-        ?float $boost = null
+        ?float $boost = null,
+        ?string $rewrite = null
     ): self {
-        return new self($field, $value, $fuzziness, $maxExpansions, $prefixLength, $transpositions, $boost);
+        return new self($field, $value, $fuzziness, $maxExpansions, $prefixLength, $transpositions, $boost, $rewrite);
     }
 
     public function __construct(
@@ -23,7 +24,8 @@ class FuzzyQuery implements Query
         protected ?int $maxExpansions = null,
         protected ?int $prefixLength = null,
         protected ?bool $transpositions = null,
-        protected ?float $boost = null
+        protected ?float $boost = null,
+        protected ?string $rewrite = null
     ) {
     }
 
@@ -55,6 +57,10 @@ class FuzzyQuery implements Query
 
         if ($this->boost !== null) {
             $fuzzy['fuzzy'][$this->field]['boost'] = $this->boost;
+        }
+
+        if ($this->rewrite !== null) {
+            $fuzzy['fuzzy'][$this->field]['rewrite'] = $this->rewrite;
         }
 
         return $fuzzy;

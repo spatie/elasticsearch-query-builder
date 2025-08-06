@@ -12,9 +12,13 @@ class PercentilesAggregation extends Aggregation
 
     protected array $percents;
 
+    protected ?bool $keyed = null;
+
     protected ?int $compression = null;
 
-    protected ?string $method = null;
+    protected ?string $executionHint = null;
+
+    protected ?int $numberOfSignificantValueDigits = null;
 
     public static function create(string $name, string $field, array $percents): self
     {
@@ -28,6 +32,13 @@ class PercentilesAggregation extends Aggregation
         $this->percents = $percents;
     }
 
+    public function keyed(bool $keyed = true): self
+    {
+        $this->keyed = $keyed;
+
+        return $this;
+    }
+
     public function compression(int $compression): self
     {
         $this->compression = $compression;
@@ -35,9 +46,17 @@ class PercentilesAggregation extends Aggregation
         return $this;
     }
 
-    public function method(string $method): self
+    public function tdigest(int $compression, ?string $executionHint = null): self
     {
-        $this->method = $method;
+        $this->compression = $compression;
+        $this->executionHint = $executionHint;
+
+        return $this;
+    }
+
+    public function hdr(int $numberOfSignificantValueDigits): self
+    {
+        $this->numberOfSignificantValueDigits = $numberOfSignificantValueDigits;
 
         return $this;
     }
@@ -49,16 +68,31 @@ class PercentilesAggregation extends Aggregation
             'percents' => $this->percents,
         ];
 
-        if ($this->compression) {
-            $parameters['tdigest'] = [
-                'compression' => $this->compression,
+        // Add keyed parameter
+        if ($this->keyed !== null) {
+            $parameters['keyed'] = $this->keyed;
+        }
+
+        // Add TDigest configuration
+        if ($this->compression !== null || $this->executionHint !== null) {
+            $tdigest = [];
+            if ($this->compression !== null) {
+                $tdigest['compression'] = $this->compression;
+            }
+            if ($this->executionHint !== null) {
+                $tdigest['execution_hint'] = $this->executionHint;
+            }
+            $parameters['tdigest'] = $tdigest;
+        }
+
+        // Add HDR configuration
+        if ($this->numberOfSignificantValueDigits !== null) {
+            $parameters['hdr'] = [
+                'number_of_significant_value_digits' => $this->numberOfSignificantValueDigits,
             ];
         }
 
-        if ($this->method) {
-            $parameters['method'] = $this->method;
-        }
-
+        // Add missing value handling
         if ($this->missing !== null) {
             $parameters['missing'] = $this->missing;
         }
