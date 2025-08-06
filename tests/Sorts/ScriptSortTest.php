@@ -3,7 +3,7 @@
 namespace Spatie\ElasticsearchQueryBuilder\Tests\Sorts;
 
 use PHPUnit\Framework\TestCase;
-use App\Elasticsearch\ScriptSort;
+use Spatie\ElasticsearchQueryBuilder\Sorts\ScriptSort;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sorting;
 
 class ScriptSortTest extends TestCase
