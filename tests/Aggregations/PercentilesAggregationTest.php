@@ -75,7 +75,21 @@ class PercentilesAggregationTest extends TestCase
             'percentiles' => [
                 'field' => 'test_field',
                 'percents' => [50],
-                'missing' => '10',
+                'missing' => 10,
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testWithZeroMissing(): void
+    {
+        $aggregation = PercentilesAggregation::create('test_name', 'test_field', [50])
+            ->missing(0);
+
+        self::assertEquals([
+            'percentiles' => [
+                'field' => 'test_field',
+                'percents' => [50],
+                'missing' => 0,
             ],
         ], $aggregation->toArray());
     }
@@ -84,7 +98,7 @@ class PercentilesAggregationTest extends TestCase
     {
         $aggregation = PercentilesAggregation::create('test_name', 'test_field', [25, 50, 75])
             ->compression(1000)
-            ->missing('10');
+            ->missing(10);
 
         self::assertEquals([
             'percentiles' => [
@@ -93,7 +107,7 @@ class PercentilesAggregationTest extends TestCase
                 'tdigest' => [
                     'compression' => 1000,
                 ],
-                'missing' => '10',
+                'missing' => 10,
             ],
         ], $aggregation->toArray());
     }
