@@ -417,6 +417,37 @@ $builder
     );
 ```
 
+### ScriptSort (Custom Script Sorting)
+
+The `ScriptSort` allows you to sort search results using custom Elasticsearch scripts. This can be helpful when you want complex sorting logic based on document fields or custom calculations.
+
+Example usage with a painless script:
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Sorts\ScriptSort;
+use Spatie\ElasticsearchQueryBuilder\Builder;
+
+$client = Elastic\Elasticsearch\ClientBuilder::create()->build();
+
+$builder = new Builder($client);
+
+$builder->addSort(
+    ScriptSort::create(
+        "doc['field_name'].value * params.factor", // painless script
+        ScriptSort::DESC,
+        ['factor' => 1.5] // parameters for the script
+    )
+);
+
+$response = $builder->search();
+```
+
+-   The first parameter is the painless script expression.
+-   The second parameter is the sort order: `ScriptSort::ASC` or `ScriptSort::DESC`.
+-   The third parameter is an optional associative array of parameters passed to the script.
+
+This feature gives you flexible control over sorting logic beyond standard field-based sorts.
+
 ## Retrieve specific fields
 
 The `fields()` method can be used to request specific fields from the resulting documents without returning the entire `_source` entry. You can read more about the specifics of the fields parameter in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-fields.html).
