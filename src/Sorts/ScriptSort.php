@@ -2,8 +2,6 @@
 
 namespace Spatie\ElasticsearchQueryBuilder\Sorts;
 
-use Spatie\ElasticsearchQueryBuilder\Sorts\Sorting;
-
 class ScriptSort implements Sorting
 {
     protected string $scriptSource;
@@ -39,24 +37,28 @@ class ScriptSort implements Sorting
     public function setOrder(string $order): self
     {
         $this->order = $order;
+
         return $this;
     }
 
     public function setLang(string $lang): self
     {
         $this->lang = $lang;
+
         return $this;
     }
 
     public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 
     public function setParams(array $params): self
     {
         $this->params = $params;
+
         return $this;
     }
 
@@ -67,7 +69,7 @@ class ScriptSort implements Sorting
             'lang' => $this->lang,
         ];
 
-        if (!empty($this->params)) {
+        if (! empty($this->params)) {
             $scriptArray['params'] = $this->params;
         }
 
