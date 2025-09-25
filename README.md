@@ -80,7 +80,7 @@ The following query types are available:
 
 #### `FuzzyQuery`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)
+[https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-fuzzy-query](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-fuzzy-query)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\FuzzyQuery::create('name', 'john', fuzziness: 2, boost: 1.5, rewrite: 'constant_score_blended');
@@ -101,7 +101,7 @@ The following query types are available:
 
 #### `IdsQuery`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html)
+[https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-ids-query](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-ids-query)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\IdsQuery::create(['user123', 'post456']);
@@ -109,7 +109,11 @@ The following query types are available:
 
 #### `MatchAllQuery`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html)
+[https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-match-all-query](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-match-all-query)
+
+#### `MatchNoneQuery`
+
+[https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-match-all-query#query-dsl-match-none-query](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-match-all-query#query-dsl-match-none-query)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MatchAllQuery::create(boost: 1.2);
@@ -138,10 +142,6 @@ The following query types are available:
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MultiMatchQuery::create('john', ['email', 'email'], fuzziness: 'auto');
 ```
-
-#### `MatchNoneQuery`
-
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-none-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-none-query.html)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\MatchNoneQuery::create();
@@ -193,7 +193,7 @@ $nestedQuery->innerHits(
 
 #### `RegexpQuery`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)
+[https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-regexp-query](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-regexp-query)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Queries\RegexpQuery::create('name', 'joh.*', flags: 'ALL', maxDeterminizedStates: 10000, rewrite: 'constant_score');
@@ -314,7 +314,7 @@ The following query types are available:
 
 #### `AvgAggregation`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html)
+[https://www.elastic.co/docs/reference/aggregations/search-aggregations-metrics-avg-aggregation](https://www.elastic.co/docs/reference/aggregations/search-aggregations-metrics-avg-aggregation)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Aggregations\AvgAggregation::create('avg_price', 'price');
@@ -334,7 +334,7 @@ The following query types are available:
 
 #### `HistogramAggregation`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html)
+[https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-histogram-aggregation](https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-histogram-aggregation)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Aggregations\HistogramAggregation::create('price_histogram', 'price', 50)
@@ -382,7 +382,7 @@ The following query types are available:
 
 #### `PercentilesAggregation`
 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html)
+[https://www.elastic.co/docs/reference/aggregations/search-aggregations-metrics-percentile-aggregation](https://www.elastic.co/docs/reference/aggregations/search-aggregations-metrics-percentile-aggregation)
 
 ```php
 \Spatie\ElasticsearchQueryBuilder\Aggregations\PercentilesAggregation::create('load_time_outlier', 'load_time', [95, 99, 99.9])
