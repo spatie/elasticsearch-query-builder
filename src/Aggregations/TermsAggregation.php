@@ -17,6 +17,10 @@ class TermsAggregation extends Aggregation
 
     protected ?array $order = null;
 
+    protected array $include = [];
+
+    protected array $exclude = [];
+
     public static function create(string $name, string $field): self
     {
         return new self($name, $field);
@@ -43,6 +47,20 @@ class TermsAggregation extends Aggregation
         return $this;
     }
 
+    public function include(array $include): self
+    {
+        $this->include = $include;
+
+        return $this;
+    }
+
+    public function exclude(array $exclude): self
+    {
+        $this->exclude = $exclude;
+
+        return $this;
+    }
+
     public function payload(): array
     {
         $parameters = [
@@ -59,6 +77,14 @@ class TermsAggregation extends Aggregation
 
         if ($this->order) {
             $parameters['order'] = $this->order;
+        }
+
+        if (count($this->include)) {
+            $parameters['include'] = $this->include;
+        }
+
+        if (count($this->exclude)) {
+            $parameters['exclude'] = $this->exclude;
         }
 
         $aggregation = [
