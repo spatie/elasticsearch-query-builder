@@ -2,6 +2,14 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.9.1 - 2025-12-01
+
+### What's Changed
+
+* Terms aggregation: Support "include" and "exclude" options for filtering values by @sventendo in https://github.com/spatie/elasticsearch-query-builder/pull/78
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.9.0...3.9.1
+
 ## 3.9.0 - 2025-09-29
 
 ### What's Changed
