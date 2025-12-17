@@ -10,9 +10,12 @@ use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sorting;
+use Spatie\ElasticsearchQueryBuilder\Traits\Conditionable;
 
 class Builder
 {
+    use Conditionable;
+    
     protected ?BoolQuery $query = null;
 
     protected ?AggregationCollection $aggregations = null;
