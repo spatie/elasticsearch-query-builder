@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.9.2 - 2026-01-05
+
+### What's Changed
+
+* feat: Enhance Builder class by adding Conditionable trait for improved query capabilities by @greezen in https://github.com/spatie/elasticsearch-query-builder/pull/79
+
+### New Contributors
+
+* @greezen made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/79
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.9.1...3.9.2
+
 ## 3.9.1 - 2025-12-01
 
 ### What's Changed
