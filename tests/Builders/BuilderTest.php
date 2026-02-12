@@ -149,6 +149,33 @@ class BuilderTest extends TestCase
         ], $payload);
     }
 
+    public function testOrWhereWithNullEqualOperatorKeepsShouldOccurrence(): void
+    {
+        $payload = (new Builder($this->client))
+            ->orWhere('status', '=', null)
+            ->getPayload();
+
+        self::assertEquals([
+            'query' => [
+                'bool' => [
+                    'should' => [
+                        [
+                            'bool' => [
+                                'must_not' => [
+                                    [
+                                        'exists' => [
+                                            'field' => 'status',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ], $payload);
+    }
+
     public function testWhereSupportsInOperator(): void
     {
         $payload = (new Builder($this->client))
@@ -282,7 +309,7 @@ class BuilderTest extends TestCase
     public function testWhereBetweenAddsRangeQueryToPayload(): void
     {
         $payload = (new Builder($this->client))
-            ->whereBetween('age', 18, 65)
+            ->whereBetween('age', [18, 65])
             ->getPayload();
 
         self::assertEquals([
@@ -306,7 +333,7 @@ class BuilderTest extends TestCase
     public function testWhereNotBetweenAddsRangeQueryToMustNotOccurrence(): void
     {
         $payload = (new Builder($this->client))
-            ->whereNotBetween('age', 18, 65)
+            ->whereNotBetween('age', [18, 65])
             ->getPayload();
 
         self::assertEquals([
@@ -510,7 +537,7 @@ class BuilderTest extends TestCase
             ->where(function (Builder $query): void {
                 $query->where('category', 'book')
                     ->orWhere(function (Builder $nestedQuery): void {
-                        $nestedQuery->whereBetween('price', 10, 100)
+                        $nestedQuery->whereBetween('price', [10, 100])
                             ->whereNotNull('published_at');
                     });
             })

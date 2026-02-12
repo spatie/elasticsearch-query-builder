@@ -303,7 +303,7 @@ $builder
     ->orWhere('team', 'search')
     ->whereNot('status', 'archived')
     ->whereIn('user.id', ['flx', 'fly'])
-    ->whereBetween('age', 18, 65)
+    ->whereBetween('age', [18, 65])
     ->whereNull('deleted_at')
     ->whereNotNull('published_at')
     ->whereExists('email')
@@ -331,7 +331,7 @@ You can also group conditions using a closure, similar to nested where clauses i
 $builder->where(function (Builder $query): void {
     $query->where('category', 'book')
         ->orWhere(function (Builder $nested): void {
-            $nested->whereBetween('price', 10, 100)
+            $nested->whereBetween('price', [10, 100])
                 ->whereNotNull('published_at');
         });
 });

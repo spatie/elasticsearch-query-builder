@@ -28,7 +28,7 @@ trait HasWhereClauses
 
         if (! $this->isWhereOperator($operatorOrValue)) {
             if ($operatorOrValue === null) {
-                return $this->whereNull($field);
+                return $this->whereNull($field, $boolType);
             }
 
             return $this->addQuery(TermQuery::create($field, $operatorOrValue), $boolType);
@@ -58,8 +58,10 @@ trait HasWhereClauses
     }
 
     public function whereBetween(string $field, array $range, string $boolType = 'must'): static {
+        [$from, $to] = $this->normalizeBetweenRange($range);
+
         return $this->addQuery(
-            RangeQuery::create($field)->gte($range[0])->lte($range[1]),
+            RangeQuery::create($field)->gte($from)->lte($to),
             $boolType
         );
     }
@@ -68,14 +70,21 @@ trait HasWhereClauses
         return $this->whereBetween($field, $range, 'must_not');
     }
 
-    public function whereNull(string $field): static
+    public function whereNull(string $field, string $boolType = 'must'): static
     {
-        return $this->whereExists($field, 'must_not');
+        if ($boolType === 'must') {
+            return $this->whereExists($field, 'must_not');
+        }
+
+        return $this->addQuery(
+            BoolQuery::create()->add(ExistsQuery::create($field), 'must_not'),
+            $boolType
+        );
     }
 
-    public function whereNotNull(string $field): static
+    public function whereNotNull(string $field, string $boolType = 'must'): static
     {
-        return $this->whereExists($field);
+        return $this->whereExists($field, $boolType);
     }
 
     public function whereExists(string $field, string $boolType = 'must'): static
@@ -180,18 +189,23 @@ trait HasWhereClauses
         $normalizedOperator = strtolower(trim($operator));
 
         return match ($normalizedOperator) {
-            '=' => $value === null ? $this->whereNull($field) : $this->addQuery(TermQuery::create($field, $value), $boolType),
-            '!=', '<>' => $value === null ? $this->whereNotNull($field) : $this->addQuery(TermQuery::create($field, $value), 'must_not'),
+            '=' => $value === null ? $this->whereNull($field, $boolType) : $this->addQuery(TermQuery::create($field, $value), $boolType),
+            '!=', '<>' => $value === null ? $this->whereNotNull($field, $boolType) : $this->addQuery(TermQuery::create($field, $value), 'must_not'),
             '>' => $this->addQuery(RangeQuery::create($field)->gt($value), $boolType),
             '>=' => $this->addQuery(RangeQuery::create($field)->gte($value), $boolType),
             '<' => $this->addQuery(RangeQuery::create($field)->lt($value), $boolType),
             '<=' => $this->addQuery(RangeQuery::create($field)->lte($value), $boolType),
             'in' => $this->whereIn($field, is_array($value) ? $value : [$value], $boolType),
             'not in' => $this->whereNotIn($field, is_array($value) ? $value : [$value]),
-            'between' => $this->whereBetween($field, $value[0] ?? null, $value[1] ?? null, $boolType),
-            'not between' => $this->whereNotBetween($field, $value[0] ?? null, $value[1] ?? null),
+            'between' => $this->whereBetween($field, is_array($value) ? $value : [$value], $boolType),
+            'not between' => $this->whereNotBetween($field, is_array($value) ? $value : [$value]),
             default => $this->addQuery(TermQuery::create($field, $value), $boolType),
         };
+    }
+
+    private function normalizeBetweenRange(array $range): array
+    {
+        return array_values($range) + [null, null];
     }
 
     private function isWhereOperator(mixed $value): bool
