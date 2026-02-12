@@ -289,6 +289,66 @@ $builder
 
 More information on the boolean query and its occurrence types can be found [in the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).
 
+### Laravel-like where shortcuts
+
+If you prefer a Laravel-like API, you can use `where` shortcuts instead of creating `Query` objects manually.
+All shortcuts still map to the existing query classes under the hood, so `addQuery()` remains fully supported.
+
+```php
+$builder = new Builder($client);
+
+$builder
+    ->where('name', 'zs')
+    ->where('age', '>=', 1)
+    ->orWhere('team', 'search')
+    ->whereNot('status', 'archived')
+    ->whereIn('user.id', ['flx', 'fly'])
+    ->whereBetween('age', 18, 65)
+    ->whereNull('deleted_at')
+    ->whereNotNull('published_at')
+    ->whereExists('email')
+    ->wherePrefix('user.id', 'fl')
+    ->whereRegexp('name', 'jo.*', flags: 'ALL');
+```
+
+The `where()` method supports both two-argument and three-argument signatures:
+
+```php
+$builder
+    ->where('name', 'zs')           // field = value
+    ->where('age', '>=', 18)        // field operator value
+    ->where('status', '!=', 'archived')
+    ->where('user.id', 'in', ['flx', 'fly'])
+    ->where('score', 'between', [60, 100]);
+```
+
+Supported operators for the three-argument form are:
+`=`, `==`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `in`, `not in`, `between`, `not between`.
+
+You can also group conditions using a closure, similar to nested where clauses in Laravel:
+
+```php
+$builder->where(function (Builder $query): void {
+    $query->where('category', 'book')
+        ->orWhere(function (Builder $nested): void {
+            $nested->whereBetween('price', 10, 100)
+                ->whereNotNull('published_at');
+        });
+});
+```
+
+For advanced control, closure groups also accept a `BoolQuery` directly:
+
+```php
+use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
+use Spatie\ElasticsearchQueryBuilder\Queries\TermQuery;
+
+$builder->where(function (BoolQuery $bool): void {
+    $bool->add(TermQuery::create('is_active', true))
+        ->add(TermQuery::create('is_deleted', true), 'must_not');
+});
+```
+
 ## Adding aggregations
 
 The `$builder->addAggregation()` method can be used to add any of the available `Aggregation`s to the builder. The available aggregation types can be found below or in the `src/Aggregations` directory of this repo. Every `Aggregation` has a static `create()` method to pass its most important parameters and sometimes some extra methods.

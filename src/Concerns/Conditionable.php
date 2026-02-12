@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Traits;
+namespace Spatie\ElasticsearchQueryBuilder\Concerns;
 
 trait Conditionable
 {

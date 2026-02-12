@@ -6,15 +6,17 @@ use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Http\Promise\Promise;
 use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
+use Spatie\ElasticsearchQueryBuilder\Concerns\HasWhereClauses;
 use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\NestedQuery\InnerHits;
 use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 use Spatie\ElasticsearchQueryBuilder\Sorts\Sorting;
-use Spatie\ElasticsearchQueryBuilder\Traits\Conditionable;
+use Spatie\ElasticsearchQueryBuilder\Concerns\Conditionable;
 
 class Builder
 {
     use Conditionable;
+    use HasWhereClauses;
     
     protected ?BoolQuery $query = null;
 
