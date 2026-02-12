@@ -149,6 +149,33 @@ class BuilderTest extends TestCase
         ], $payload);
     }
 
+    public function testOrWhereWithNotEqualOperatorKeepsShouldOccurrence(): void
+    {
+        $payload = (new Builder($this->client))
+            ->orWhere('status', '!=', 'archived')
+            ->getPayload();
+
+        self::assertEquals([
+            'query' => [
+                'bool' => [
+                    'should' => [
+                        [
+                            'bool' => [
+                                'must_not' => [
+                                    [
+                                        'term' => [
+                                            'status' => 'archived',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ], $payload);
+    }
+
     public function testOrWhereWithNullEqualOperatorKeepsShouldOccurrence(): void
     {
         $payload = (new Builder($this->client))
@@ -165,6 +192,63 @@ class BuilderTest extends TestCase
                                     [
                                         'exists' => [
                                             'field' => 'status',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ], $payload);
+    }
+
+    public function testOrWhereWithNotInOperatorKeepsShouldOccurrence(): void
+    {
+        $payload = (new Builder($this->client))
+            ->orWhere('user.id', 'not in', ['flx', 'fly'])
+            ->getPayload();
+
+        self::assertEquals([
+            'query' => [
+                'bool' => [
+                    'should' => [
+                        [
+                            'bool' => [
+                                'must_not' => [
+                                    [
+                                        'terms' => [
+                                            'user.id' => ['flx', 'fly'],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ], $payload);
+    }
+
+    public function testOrWhereWithNotBetweenOperatorKeepsShouldOccurrence(): void
+    {
+        $payload = (new Builder($this->client))
+            ->orWhere('age', 'not between', [18, 65])
+            ->getPayload();
+
+        self::assertEquals([
+            'query' => [
+                'bool' => [
+                    'should' => [
+                        [
+                            'bool' => [
+                                'must_not' => [
+                                    [
+                                        'range' => [
+                                            'age' => [
+                                                'lte' => 65,
+                                                'gte' => 18,
+                                            ],
                                         ],
                                     ],
                                 ],

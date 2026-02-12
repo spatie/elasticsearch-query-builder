@@ -11,6 +11,7 @@ use Spatie\ElasticsearchQueryBuilder\Builder;
 use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\ExistsQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\PrefixQuery;
+use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 use Spatie\ElasticsearchQueryBuilder\Queries\RangeQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\RegexpQuery;
 use Spatie\ElasticsearchQueryBuilder\Queries\TermQuery;
@@ -58,12 +59,7 @@ trait HasWhereClauses
     }
 
     public function whereBetween(string $field, array $range, string $boolType = 'must'): static {
-        [$from, $to] = $this->normalizeBetweenRange($range);
-
-        return $this->addQuery(
-            RangeQuery::create($field)->gte($from)->lte($to),
-            $boolType
-        );
+        return $this->addQuery($this->createBetweenRangeQuery($field, $range), $boolType);
     }
 
     public function whereNotBetween(string $field, array $range): static {
@@ -190,22 +186,46 @@ trait HasWhereClauses
 
         return match ($normalizedOperator) {
             '=' => $value === null ? $this->whereNull($field, $boolType) : $this->addQuery(TermQuery::create($field, $value), $boolType),
-            '!=', '<>' => $value === null ? $this->whereNotNull($field, $boolType) : $this->addQuery(TermQuery::create($field, $value), 'must_not'),
+            '!=', '<>' => $value === null
+                ? $this->whereNotNull($field, $boolType)
+                : $this->addNegatedQuery(TermQuery::create($field, $value), $boolType),
             '>' => $this->addQuery(RangeQuery::create($field)->gt($value), $boolType),
             '>=' => $this->addQuery(RangeQuery::create($field)->gte($value), $boolType),
             '<' => $this->addQuery(RangeQuery::create($field)->lt($value), $boolType),
             '<=' => $this->addQuery(RangeQuery::create($field)->lte($value), $boolType),
             'in' => $this->whereIn($field, is_array($value) ? $value : [$value], $boolType),
-            'not in' => $this->whereNotIn($field, is_array($value) ? $value : [$value]),
+            'not in' => $this->addNegatedQuery(
+                TermsQuery::create($field, is_array($value) ? $value : [$value]),
+                $boolType
+            ),
             'between' => $this->whereBetween($field, is_array($value) ? $value : [$value], $boolType),
-            'not between' => $this->whereNotBetween($field, is_array($value) ? $value : [$value]),
+            'not between' => $this->addNegatedQuery($this->createBetweenRangeQuery($field, is_array($value) ? $value : [$value]), $boolType),
             default => $this->addQuery(TermQuery::create($field, $value), $boolType),
         };
+    }
+
+    private function addNegatedQuery(Query $query, string $boolType): static
+    {
+        if ($boolType === 'must') {
+            return $this->addQuery($query, 'must_not');
+        }
+
+        return $this->addQuery(
+            BoolQuery::create()->add($query, 'must_not'),
+            $boolType
+        );
     }
 
     private function normalizeBetweenRange(array $range): array
     {
         return array_values($range) + [null, null];
+    }
+
+    private function createBetweenRangeQuery(string $field, array $range): Query
+    {
+        [$from, $to] = $this->normalizeBetweenRange($range);
+
+        return RangeQuery::create($field)->gte($from)->lte($to);
     }
 
     private function isWhereOperator(mixed $value): bool
