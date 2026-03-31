@@ -15,7 +15,7 @@ use Spatie\ElasticsearchQueryBuilder\Traits\Conditionable;
 class Builder
 {
     use Conditionable;
-    
+
     protected ?BoolQuery $query = null;
 
     protected ?AggregationCollection $aggregations = null;
@@ -32,7 +32,9 @@ class Builder
 
     protected ?array $searchAfter = null;
 
-    protected ?array $fields = null;
+    protected array|false|null $fields = null;
+
+    protected ?array $mappingFields = null;
 
     protected bool $withAggregations = true;
 
@@ -155,9 +157,30 @@ class Builder
         return $this;
     }
 
-    public function fields(array $fields): static
+    /**
+     * @deprecated
+     */
+    public function fields(array|false $fields): static
     {
+        return $this->source($fields);
+    }
+
+    public function source(array|false $fields): static
+    {
+        if ($fields === false) {
+            $this->fields = false;
+
+            return $this;
+        }
+
         $this->fields = array_merge($this->fields ?? [], $fields);
+
+        return $this;
+    }
+
+    public function mappingFields(array $fields): static
+    {
+        $this->mappingFields = array_merge($this->mappingFields ?? [], $fields);
 
         return $this;
     }
@@ -233,8 +256,12 @@ class Builder
             $payload['sort'] = $this->sorts->toArray();
         }
 
-        if ($this->fields) {
+        if ($this->fields !== null) {
             $payload['_source'] = $this->fields;
+        }
+
+        if ($this->mappingFields) {
+            $payload['fields'] = $this->mappingFields;
         }
 
         if ($this->searchAfter) {

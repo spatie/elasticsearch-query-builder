@@ -82,4 +82,31 @@ class BuilderTest extends TestCase
         $this->assertArrayHasKey('min_score', $payload);
         $this->assertEquals(0.1, $payload['min_score']);
     }
+
+    /**
+     * This test is to document current behavior
+     * and catch breaking changes if the "fields" method should be renamed at some point
+     * (to better reflect the payload parameter).
+     */
+    public function testTreatsFieldsAsSourceFields(): void
+    {
+        $builder = (new Builder($this->client))
+            ->fields([ 'includes' => [ 'my_included_source_field' ], 'excludes' => [ 'my_excluded_source_field' ] ]);
+
+        $this->assertEquals(
+            [ 'includes' => [ 'my_included_source_field' ], 'excludes' => [ 'my_excluded_source_field' ] ],
+            $builder->getPayload()['_source']
+        );
+    }
+
+    public function testFilterMappingFields(): void
+    {
+        $builder = (new Builder($this->client))
+            ->source(false)
+            ->mappingFields([ 'my_mapping_field' ]);
+
+        $payload = $builder->getPayload();
+        $this->assertEquals([ 'my_mapping_field' ], $payload['fields']);
+        $this->assertFalse($payload['_source']);
+    }
 }
