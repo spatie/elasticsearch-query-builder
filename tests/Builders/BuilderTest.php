@@ -103,6 +103,9 @@ class BuilderTest extends TestCase
     {
         $builder = (new Builder($this->client))
             ->source(false)
+            // Switch back and forth between types to check compatibility.
+            ->source(['my_other_mapping_field'])
+            ->source(false)
             ->mappingFields([ 'my_mapping_field' ]);
 
         $payload = $builder->getPayload();
