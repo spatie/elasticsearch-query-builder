@@ -31,7 +31,7 @@ class BuilderTest extends TestCase
             'name' => 'first_group',
             'size' => 1,
             'sort' => [
-                [ 'name.keyword' => [ 'order' => 'asc' ] ],
+                ['name.keyword' => ['order' => 'asc']],
             ],
         ];
 
@@ -39,7 +39,7 @@ class BuilderTest extends TestCase
             ->collapse('group_id', $innerHits);
 
         self::assertEquals(
-            [ 'collapse' => [ 'field' => 'group_id', 'inner_hits' => $innerHits ] ],
+            ['collapse' => ['field' => 'group_id', 'inner_hits' => $innerHits]],
             $builder->getPayload()
         );
     }
@@ -91,10 +91,10 @@ class BuilderTest extends TestCase
     public function testTreatsFieldsAsSourceFields(): void
     {
         $builder = (new Builder($this->client))
-            ->fields([ 'includes' => [ 'my_included_source_field' ], 'excludes' => [ 'my_excluded_source_field' ] ]);
+            ->fields(['includes' => ['my_included_source_field'], 'excludes' => ['my_excluded_source_field']]);
 
         $this->assertEquals(
-            [ 'includes' => [ 'my_included_source_field' ], 'excludes' => [ 'my_excluded_source_field' ] ],
+            ['includes' => ['my_included_source_field'], 'excludes' => ['my_excluded_source_field']],
             $builder->getPayload()['_source']
         );
     }
@@ -106,10 +106,10 @@ class BuilderTest extends TestCase
             // Switch back and forth between types to check compatibility.
             ->source(['my_other_mapping_field'])
             ->source(false)
-            ->mappingFields([ 'my_mapping_field' ]);
+            ->mappingFields(['my_mapping_field']);
 
         $payload = $builder->getPayload();
-        $this->assertEquals([ 'my_mapping_field' ], $payload['fields']);
+        $this->assertEquals(['my_mapping_field'], $payload['fields']);
         $this->assertFalse($payload['_source']);
     }
 }
