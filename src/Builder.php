@@ -34,7 +34,7 @@ class Builder
 
     protected array|false|null $fields = null;
 
-    protected ?array $mappingFields = null;
+    protected ?array $retrieveFields = null;
 
     protected bool $withAggregations = true;
 
@@ -46,14 +46,12 @@ class Builder
 
     protected ?array $collapse = null;
 
-    public function __construct(protected Client $client)
-    {
-    }
+    public function __construct(protected Client $client) {}
 
     public function addQuery(Query $query, string $boolType = 'must'): static
     {
         if (! $this->query) {
-            $this->query = new BoolQuery();
+            $this->query = new BoolQuery;
         }
 
         $this->query->add($query, $boolType);
@@ -64,7 +62,7 @@ class Builder
     public function addAggregation(Aggregation $aggregation): static
     {
         if (! $this->aggregations) {
-            $this->aggregations = new AggregationCollection();
+            $this->aggregations = new AggregationCollection;
         }
 
         $this->aggregations->add($aggregation);
@@ -75,7 +73,7 @@ class Builder
     public function addSort(Sorting $sort): static
     {
         if (! $this->sorts) {
-            $this->sorts = new SortCollection();
+            $this->sorts = new SortCollection;
         }
 
         $this->sorts->add($sort);
@@ -178,9 +176,9 @@ class Builder
         return $this;
     }
 
-    public function mappingFields(array $fields): static
+    public function retrieveFields(array $fields): static
     {
-        $this->mappingFields = array_merge($this->mappingFields ?? [], $fields);
+        $this->retrieveFields = array_merge($this->retrieveFields ?? [], $fields);
 
         return $this;
     }
@@ -202,7 +200,7 @@ class Builder
     public function addPostFilterQuery(Query $query, string $boolType = 'must'): static
     {
         if (! $this->postFilterQuery) {
-            $this->postFilterQuery = new BoolQuery();
+            $this->postFilterQuery = new BoolQuery;
         }
 
         $this->postFilterQuery->add($query, $boolType);
@@ -260,8 +258,8 @@ class Builder
             $payload['_source'] = $this->fields;
         }
 
-        if ($this->mappingFields) {
-            $payload['fields'] = $this->mappingFields;
+        if ($this->retrieveFields) {
+            $payload['fields'] = $this->retrieveFields;
         }
 
         if ($this->searchAfter) {

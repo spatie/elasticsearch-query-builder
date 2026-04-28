@@ -520,10 +520,37 @@ This feature gives you flexible control over sorting logic beyond standard field
 
 ## Retrieve specific fields
 
-The `fields()` method can be used to request specific fields from the resulting documents without returning the entire `_source` entry. You can read more about the specifics of the fields parameter in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-fields.html).
+ElasticSearch exposes two parameters for limiting what comes back in each hit: `_source` and `fields`. They behave differently and the builder maps each to a dedicated method.
+
+### `source()`
+
+The `source()` method writes to the `_source` parameter. ElasticSearch still loads the full stored document and then filters which top-level keys are returned. Pass an array of include paths (or an `includes`/`excludes` shape):
 
 ```php
-$builder->fields('user.id', 'http.*.status');
+$builder->source(['user.id', 'user.name']);
+
+$builder->source([
+    'includes' => ['user.*'],
+    'excludes' => ['user.password'],
+]);
+```
+
+Pass `false` to omit `_source` from each hit entirely:
+
+```php
+$builder->source(false);
+```
+
+The previously available `fields()` method has been deprecated in favor of `source()` since it wrote to `_source` despite its name. It still works and delegates to `source()`.
+
+### `retrieveFields()`
+
+The `retrieveFields()` method writes to the `fields` query parameter. ElasticSearch resolves the values through the index mapping instead of loading `_source`, which is meaningfully cheaper when you only need a handful of fields. See [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-fields.html) for the trade-offs.
+
+```php
+$builder
+    ->source(false)
+    ->retrieveFields(['user.id', 'http.status']);
 ```
 
 ## Highlighting

@@ -14,10 +14,10 @@ class BuilderTest extends TestCase
 {
     protected Client $client;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $transport = TransportBuilder::create()
-            ->setClient(new \Http\Mock\Client())
+            ->setClient(new \Http\Mock\Client)
             ->build();
 
         $logger = $this->createStub(LoggerInterface::class);
@@ -25,7 +25,7 @@ class BuilderTest extends TestCase
         $this->client = new Client($transport, $logger);
     }
 
-    public function testGeneratesCollapseWithPlainArrayData(): void
+    public function test_generates_collapse_with_plain_array_data(): void
     {
         $innerHits = [
             'name' => 'first_group',
@@ -44,7 +44,7 @@ class BuilderTest extends TestCase
         );
     }
 
-    public function testGeneratesCollapseWithInnerHitsObject(): void
+    public function test_generates_collapse_with_inner_hits_object(): void
     {
         $innerHits = InnerHits::create('first_group')
             ->size(1)
@@ -73,7 +73,7 @@ class BuilderTest extends TestCase
         );
     }
 
-    public function testMinScoreIsAppliedToThePayload(): void
+    public function test_min_score_is_applied_to_the_payload(): void
     {
         $payload = (new Builder($this->client))
             ->minScore(0.1)
@@ -88,7 +88,7 @@ class BuilderTest extends TestCase
      * and catch breaking changes if the "fields" method should be renamed at some point
      * (to better reflect the payload parameter).
      */
-    public function testTreatsFieldsAsSourceFields(): void
+    public function test_treats_fields_as_source_fields(): void
     {
         $builder = (new Builder($this->client))
             ->fields(['includes' => ['my_included_source_field'], 'excludes' => ['my_excluded_source_field']]);
@@ -99,17 +99,17 @@ class BuilderTest extends TestCase
         );
     }
 
-    public function testFilterMappingFields(): void
+    public function test_retrieve_fields(): void
     {
         $builder = (new Builder($this->client))
             ->source(false)
             // Switch back and forth between types to check compatibility.
-            ->source(['my_other_mapping_field'])
+            ->source(['my_source_field'])
             ->source(false)
-            ->mappingFields(['my_mapping_field']);
+            ->retrieveFields(['my_field']);
 
         $payload = $builder->getPayload();
-        $this->assertEquals(['my_mapping_field'], $payload['fields']);
+        $this->assertEquals(['my_field'], $payload['fields']);
         $this->assertFalse($payload['_source']);
     }
 }
