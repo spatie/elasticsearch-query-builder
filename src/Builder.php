@@ -15,7 +15,7 @@ use Spatie\ElasticsearchQueryBuilder\Traits\Conditionable;
 class Builder
 {
     use Conditionable;
-    
+
     protected ?BoolQuery $query = null;
 
     protected ?AggregationCollection $aggregations = null;
@@ -32,7 +32,9 @@ class Builder
 
     protected ?array $searchAfter = null;
 
-    protected ?array $fields = null;
+    protected array|false|null $fields = null;
+
+    protected ?array $retrieveFields = null;
 
     protected bool $withAggregations = true;
 
@@ -51,7 +53,7 @@ class Builder
     public function addQuery(Query $query, string $boolType = 'must'): static
     {
         if (! $this->query) {
-            $this->query = new BoolQuery();
+            $this->query = new BoolQuery;
         }
 
         $this->query->add($query, $boolType);
@@ -62,7 +64,7 @@ class Builder
     public function addAggregation(Aggregation $aggregation): static
     {
         if (! $this->aggregations) {
-            $this->aggregations = new AggregationCollection();
+            $this->aggregations = new AggregationCollection;
         }
 
         $this->aggregations->add($aggregation);
@@ -73,7 +75,7 @@ class Builder
     public function addSort(Sorting $sort): static
     {
         if (! $this->sorts) {
-            $this->sorts = new SortCollection();
+            $this->sorts = new SortCollection;
         }
 
         $this->sorts->add($sort);
@@ -155,9 +157,30 @@ class Builder
         return $this;
     }
 
-    public function fields(array $fields): static
+    /**
+     * @deprecated
+     */
+    public function fields(array|false $fields): static
     {
-        $this->fields = array_merge($this->fields ?? [], $fields);
+        return $this->source($fields);
+    }
+
+    public function source(array|false $fields): static
+    {
+        if ($fields === false) {
+            $this->fields = false;
+
+            return $this;
+        }
+
+        $this->fields = array_merge($this->fields ?: [], $fields);
+
+        return $this;
+    }
+
+    public function retrieveFields(array $fields): static
+    {
+        $this->retrieveFields = array_merge($this->retrieveFields ?? [], $fields);
 
         return $this;
     }
@@ -179,7 +202,7 @@ class Builder
     public function addPostFilterQuery(Query $query, string $boolType = 'must'): static
     {
         if (! $this->postFilterQuery) {
-            $this->postFilterQuery = new BoolQuery();
+            $this->postFilterQuery = new BoolQuery;
         }
 
         $this->postFilterQuery->add($query, $boolType);
@@ -233,8 +256,12 @@ class Builder
             $payload['sort'] = $this->sorts->toArray();
         }
 
-        if ($this->fields) {
+        if ($this->fields !== null) {
             $payload['_source'] = $this->fields;
+        }
+
+        if ($this->retrieveFields) {
+            $payload['fields'] = $this->retrieveFields;
         }
 
         if ($this->searchAfter) {
