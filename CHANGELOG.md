@@ -2,6 +2,18 @@
 
 All notable changes to `elasticsearch-query-builder` will be documented in this file.
 
+## 3.10.0 - 2026-04-28
+
+### What's Changed
+
+* Add source() and retrieveFields(), deprecate fields() by @freekmurze in https://github.com/spatie/elasticsearch-query-builder/pull/82
+
+### New Contributors
+
+* @freekmurze made their first contribution in https://github.com/spatie/elasticsearch-query-builder/pull/82
+
+**Full Changelog**: https://github.com/spatie/elasticsearch-query-builder/compare/3.9.2...3.10.0
+
 ## 3.9.2 - 2026-01-05
 
 ### What's Changed
