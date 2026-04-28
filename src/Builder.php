@@ -46,7 +46,9 @@ class Builder
 
     protected ?array $collapse = null;
 
-    public function __construct(protected Client $client) {}
+    public function __construct(protected Client $client)
+    {
+    }
 
     public function addQuery(Query $query, string $boolType = 'must'): static
     {
